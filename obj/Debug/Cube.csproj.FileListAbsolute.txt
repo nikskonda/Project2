@@ -1,0 +1,31 @@
+C:\Users\kola\Desktop\Cube\bin\Debug\Cube.exe.config
+C:\Users\kola\Desktop\Cube\bin\Debug\Cube.exe
+C:\Users\kola\Desktop\Cube\bin\Debug\Cube.pdb
+C:\Users\kola\Desktop\Cube\obj\Debug\Cube.csprojResolveAssemblyReference.cache
+C:\Users\kola\Desktop\Cube\obj\Debug\Cube.Form1.resources
+C:\Users\kola\Desktop\Cube\obj\Debug\Cube.Properties.Resources.resources
+C:\Users\kola\Desktop\Cube\obj\Debug\Cube.csproj.GenerateResource.Cache
+C:\Users\kola\Desktop\Cube\obj\Debug\Cube.exe
+C:\Users\kola\Desktop\Cube\obj\Debug\Cube.pdb
+C:\Users\Юрий\Desktop\Cube\bin\Debug\Cube.exe.config
+C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.exe
+C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.pdb
+C:\Users\Юрий\Desktop\Cube\bin\Debug\Cube.exe
+C:\Users\Юрий\Desktop\Cube\bin\Debug\Cube.pdb
+C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.csprojResolveAssemblyReference.cache
+C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.Form1.resources
+C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.Properties.Resources.resources
+C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.csproj.GenerateResource.Cache
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Sells_Cube_2703'18\bin\Debug\Cube.exe.config
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Sells_Cube_2703'18\obj\Debug\Cube.exe
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Sells_Cube_2703'18\obj\Debug\Cube.pdb
+d:\Univer\Visual Studio Project\Sells_Cube_2703'18\bin\Debug\Cube.exe.config
+d:\Univer\Visual Studio Project\Sells_Cube_2703'18\bin\Debug\Cube.exe
+d:\Univer\Visual Studio Project\Sells_Cube_2703'18\bin\Debug\Cube.pdb
+d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csprojResolveAssemblyReference.cache
+d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.Form1.resources
+d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.Properties.Resources.resources
+d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csproj.GenerateResource.Cache
+d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csproj.CoreCompileInputs.cache
+d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.exe
+d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.pdb
