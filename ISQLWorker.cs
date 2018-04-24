@@ -10,7 +10,6 @@ namespace Cube
 {
     public interface ISQLWorker
     {
-        SqlConnection GetSqlConnection(String namePC, String nameDB);
 
         List<Detail> GetDetails();
 

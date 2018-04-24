@@ -23,7 +23,7 @@ namespace Cube
         private SketchManager swSketchManager;
         private SelectionMgr swSelMgr;
 
-        SQLWorker sqlWorker = new SQLWorker();
+        SQLWorker sqlWorker = new SQLWorker("NIKITA", "Project2");
 
         Cells h;
 
@@ -40,7 +40,7 @@ namespace Cube
 
         //Add Detail
         //List<Cell> cells;
-        List<Material> materials;
+        List<Material> materials= new List<Material>();
 
         public Form1()
         {
@@ -53,13 +53,8 @@ namespace Cube
             multiplierCheck.Checked = true;
             IterCheck.Checked = true;
 
-            details.Clear();
-            details = sqlWorker.GetDetails();
-            foreach (Detail d in details)
-            {
-                cmbBoxChooseDetail.Items.Add(d.Name);
-            }   
 
+            loadDetails();
 
             //Add Detail
             chooseMaterial.Checked = true;
@@ -68,22 +63,76 @@ namespace Cube
 
             loadCells();
 
+            loadDetailProperty();
+
+            loadCSProperty();
+
+            foreach (ParentType p in Enum.GetValues(typeof(ParentType)))
+            {
+                cmbChooseParentType.Items.Add(p.ToString());
+            }
+        }
+
+        private void loadDetailProperty(ComboBox cmb)
+        {
+            detProperties.Clear();
             detProperties = sqlWorker.GetProperties(ParentType.Detail);
+            cmb.Items.Clear();
             foreach (Property p in detProperties)
             {
-                cmbADDetParamChoose.Items.Add(p.GetStringNameAndUnit());
+                cmb.Items.Add(p.GetStringNameAndUnit());
             }
+        }
 
+        private void loadCSProperty(ComboBox cmb)
+        {
+            csProperties.Clear();
             csProperties = sqlWorker.GetProperties(ParentType.CelluralStructure);
+
             foreach (Property p in csProperties)
             {
-                cmbCSProp.Items.Add(p.GetStringNameAndUnit());
+                cmb.Items.Add(p.GetStringNameAndUnit());
+            }
+        }
+
+        private void loadCellProperty(ComboBox cmb)
+        {
+            cellProperties.Clear();
+            cellProperties = sqlWorker.GetProperties(ParentType.Cell);
+            cmb.Items.Clear();
+            foreach (Property p in cellProperties)
+            {
+                cmb.Items.Add(p.GetStringNameAndUnit());
+            }
+        }
+
+        private void loadMaterialProperty(ComboBox cmb)
+        {
+            matProperties.Clear();
+            matProperties = sqlWorker.GetProperties(ParentType.Material);
+            cmb.Items.Clear();
+            foreach (Property p in matProperties)
+            {
+                cmb.Items.Add(p.GetStringNameAndUnit());
+            }
+        }
+
+
+
+        private void loadDetails()
+        {
+            details.Clear();
+            details = sqlWorker.GetDetails();
+            foreach (Detail d in details)
+            {
+                cmbBoxChooseDetail.Items.Add(d.Name);
             }
         }
 
         private void loadMaterials()
         {
             cmbADMatChoose.Items.Clear();
+            materials.Clear();
             materials = sqlWorker.GetMaterials();
             foreach (Material m in materials)
             {
@@ -93,6 +142,8 @@ namespace Cube
         public void loadCells()
         {
             cmbADCellChoose.Items.Clear();
+
+
             List<Cell> list = sqlWorker.GetCells();
             foreach (Cell c in list)
             {
@@ -502,7 +553,8 @@ namespace Cube
 
                 txtVDMaterialInfo.Text = detail.Material.ToString();
 
-                txtVDCSInfo.Text = detail.CellStructure.GetStringProperties();
+                txtVDCSInfo.Text = detail.CellStructure.Description + System.Environment.NewLine;
+                txtVDCSInfo.Text += detail.CellStructure.GetStringProperties();
 
                 foreach (Cell cell in detail.CellStructure.Cells)
                 {
@@ -608,6 +660,31 @@ namespace Cube
                 DialogManager.showDialogError("Error value");
             }
         }
+        //del det prop
+        private void btnDelDetProp_Click(object sender, EventArgs e)
+        {
+            string txt = txtAVDetParamValue.Text;
+            if (!IsNull(cmbADDetParamChoose))
+            {
+                string prop = cmbADDetParamChoose.SelectedItem.ToString();
+                Property p = newDetail.Properties.FindLast(x => x.GetStringNameAndUnit().Equals(prop));
+                if (p != null)
+                {
+
+                    newDetail.Properties.Remove(p);
+
+                    txtAdDetParams.Text = newDetail.GetStringProperties();
+                }
+                else
+                {
+                    DialogManager.showDialogError("Property 404");
+                }
+            }
+            else
+            {
+                DialogManager.showDialogError("Chooce property");
+            }
+        }
         //add material
         private void btnSetMat_Click(object sender, EventArgs e)
         {          
@@ -681,6 +758,31 @@ namespace Cube
             }
         }
 
+        //del cs prop
+        private void btnDelCSProp_Click(object sender, EventArgs e)
+        {
+            string txt = txtCSPropValue.Text;
+            if ((IsNumber(txt)) && (!IsNull(cmbCSProp)))
+            {
+
+                Property p = newDetail.CellStructure.Properties.FindLast(x => x.GetStringNameAndUnit().Equals(cmbCSProp.SelectedItem.ToString()));
+                if (p != null)
+                {
+
+                    newDetail.CellStructure.Properties.Remove(p);
+                    txtADCSProp.Text = newDetail.CellStructure.GetStringProperties();
+                }
+                else
+                {
+                    DialogManager.showDialogError("Property 404");
+                }
+            }
+            else
+            {
+                DialogManager.showDialogError("Chooce property");
+            }
+        }
+
         //view choose cell
         private void cmbADCellChoose_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -695,7 +797,7 @@ namespace Cube
         private void chooseMaterial_CheckedChanged(object sender, EventArgs e)
         {
             objProperties.Clear();
-            cmbADAddProp.Items.Clear();
+            loadMaterialProperty(cmbADAddProp);
 
             txtADAddName.Clear();
             txtADAddDesc.Clear();
@@ -705,10 +807,6 @@ namespace Cube
             printListProperties(txtADAddProp, objProperties);
             btnADAddObj.Text = "Add Material";
 
-            matProperties = sqlWorker.GetProperties(ParentType.Material);
-
-            foreach (Property p in matProperties)
-                cmbADAddProp.Items.Add(p.GetStringNameAndUnit());
         }
         //view objProp
         private void printListProperties(TextBox txt, List<Property> list)
@@ -724,19 +822,16 @@ namespace Cube
         private void chooseCell_CheckedChanged(object sender, EventArgs e)
         {
             objProperties.Clear() ;
-            cmbADAddProp.Items.Clear();
+
+            loadCellProperty(cmbADAddProp);
+
             btnADAddObj.Text = "Add Cell";
             txtADAddName.Clear();
             txtADAddDesc.Clear();
 
             gbCT.Show();
 
-            printListProperties(txtADAddProp, objProperties);
-
-            cellProperties = sqlWorker.GetProperties(ParentType.Cell);
-
-            foreach (Property p in detProperties)
-                cmbADAddProp.Items.Add(p.GetStringNameAndUnit());
+            printListProperties(txtADAddProp, objProperties);            
 
 
             loadCellTypes();
@@ -839,7 +934,7 @@ namespace Cube
                 
         }
 
-        //add onj Prop
+        //add obj Prop
         private void btnAddProp_Click(object sender, EventArgs e)
         {
             string value = txtADAddValue.Text;         
@@ -997,8 +1092,7 @@ namespace Cube
                 {
                     DialogManager.showDialogError("Error db");
                 }
-                details.Clear();
-                details = sqlWorker.GetDetails();
+                loadDetails();
                 
 
             }
@@ -1083,6 +1177,51 @@ namespace Cube
             else
             {
                 DialogManager.showDialogError("Error value");
+            }
+        }
+        //add new property
+        private void btnAddNewProp_Click(object sender, EventArgs e)
+        {
+            if (!IsNull(txtNewPropName) && !IsNull(cmbChooseParentType))
+            {
+                if (IsNull(txtNewPropUnit))
+                {
+                    if (!DialogManager.showDialogYesNo("Empty Unit. Continue?"))
+                    {
+                        return;
+                    }
+                    ParentType pt = new ParentType();
+                    string txt = cmbChooseParentType.SelectedItem.ToString();
+                    
+                    Property p = new Property(txtNewPropName.Text, txtNewPropUnit.Text);
+                    sqlWorker.AddProperty(p, pt);
+
+                    switch (pt)
+                    {
+                        case ParentType.Detail:
+                            loadDetailProperty();
+                            break;
+                        case ParentType.Material:
+                            if (chooseMaterial.Checked)
+                            {
+                                loadMaterialProperty(cmbADAddProp);
+                            }
+                            break;
+                        case ParentType.Cell:
+                            if (chooseCell.Checked)
+                            {
+                                loadCellProperty(cmbADAddProp);
+                            }
+                            break;
+                        case ParentType.CelluralStructure:
+                            loadCSProperty();
+                            break;
+                    }
+
+                }
+            } else
+            {
+                DialogManager.showDialogError("Empty fields");
             }
         }
     }

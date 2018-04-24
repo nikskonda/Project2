@@ -81,6 +81,7 @@
             this.btnADCSPropAdd = new System.Windows.Forms.Button();
             this.txtCSPropValue = new System.Windows.Forms.TextBox();
             this.boxADChooseMat = new System.Windows.Forms.GroupBox();
+            this.btnDelCell = new System.Windows.Forms.Button();
             this.gbCT = new System.Windows.Forms.GroupBox();
             this.txtCellType = new System.Windows.Forms.TextBox();
             this.btnAddCT = new System.Windows.Forms.Button();
@@ -107,7 +108,13 @@
             this.txtAVDetParamValue = new System.Windows.Forms.TextBox();
             this.txtADDetDesc = new System.Windows.Forms.TextBox();
             this.txtADDetName = new System.Windows.Forms.TextBox();
-            this.btnDelCell = new System.Windows.Forms.Button();
+            this.btnDelDetProp = new System.Windows.Forms.Button();
+            this.btnDelCSProp = new System.Windows.Forms.Button();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.txtNewPropName = new System.Windows.Forms.TextBox();
+            this.txtNewPropUnit = new System.Windows.Forms.TextBox();
+            this.cmbChooseParentType = new System.Windows.Forms.ComboBox();
+            this.btnAddNewProp = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -123,6 +130,7 @@
             this.boxADChooseMat.SuspendLayout();
             this.gbCT.SuspendLayout();
             this.boxAD.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -562,6 +570,7 @@
             // 
             // tabAddDetail
             // 
+            this.tabAddDetail.Controls.Add(this.groupBox4);
             this.tabAddDetail.Controls.Add(this.btnAddDetail);
             this.tabAddDetail.Controls.Add(this.boxAdCS);
             this.tabAddDetail.Controls.Add(this.boxADChooseMat);
@@ -575,9 +584,10 @@
             // 
             // btnAddDetail
             // 
-            this.btnAddDetail.Location = new System.Drawing.Point(545, 349);
+            this.btnAddDetail.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddDetail.Location = new System.Drawing.Point(532, 448);
             this.btnAddDetail.Name = "btnAddDetail";
-            this.btnAddDetail.Size = new System.Drawing.Size(63, 57);
+            this.btnAddDetail.Size = new System.Drawing.Size(76, 72);
             this.btnAddDetail.TabIndex = 15;
             this.btnAddDetail.Text = "Add Detail";
             this.btnAddDetail.UseVisualStyleBackColor = true;
@@ -585,15 +595,16 @@
             // 
             // boxAdCS
             // 
+            this.boxAdCS.Controls.Add(this.btnDelCSProp);
             this.boxAdCS.Controls.Add(this.txtADCSDesc);
             this.boxAdCS.Controls.Add(this.txtADCSCells);
             this.boxAdCS.Controls.Add(this.txtADCSProp);
             this.boxAdCS.Controls.Add(this.cmbCSProp);
             this.boxAdCS.Controls.Add(this.btnADCSPropAdd);
             this.boxAdCS.Controls.Add(this.txtCSPropValue);
-            this.boxAdCS.Location = new System.Drawing.Point(22, 262);
+            this.boxAdCS.Location = new System.Drawing.Point(22, 220);
             this.boxAdCS.Name = "boxAdCS";
-            this.boxAdCS.Size = new System.Drawing.Size(509, 216);
+            this.boxAdCS.Size = new System.Drawing.Size(573, 216);
             this.boxAdCS.TabIndex = 3;
             this.boxAdCS.TabStop = false;
             this.boxAdCS.Text = "CellStructure";
@@ -617,24 +628,24 @@
             // 
             // txtADCSProp
             // 
-            this.txtADCSProp.Location = new System.Drawing.Point(231, 76);
+            this.txtADCSProp.Location = new System.Drawing.Point(204, 56);
             this.txtADCSProp.Multiline = true;
             this.txtADCSProp.Name = "txtADCSProp";
             this.txtADCSProp.ReadOnly = true;
-            this.txtADCSProp.Size = new System.Drawing.Size(253, 134);
+            this.txtADCSProp.Size = new System.Drawing.Size(363, 142);
             this.txtADCSProp.TabIndex = 5;
             // 
             // cmbCSProp
             // 
             this.cmbCSProp.FormattingEnabled = true;
-            this.cmbCSProp.Location = new System.Drawing.Point(231, 28);
+            this.cmbCSProp.Location = new System.Drawing.Point(358, 28);
             this.cmbCSProp.Name = "cmbCSProp";
             this.cmbCSProp.Size = new System.Drawing.Size(92, 21);
             this.cmbCSProp.TabIndex = 4;
             // 
             // btnADCSPropAdd
             // 
-            this.btnADCSPropAdd.Location = new System.Drawing.Point(446, 28);
+            this.btnADCSPropAdd.Location = new System.Drawing.Point(510, 28);
             this.btnADCSPropAdd.Name = "btnADCSPropAdd";
             this.btnADCSPropAdd.Size = new System.Drawing.Size(38, 22);
             this.btnADCSPropAdd.TabIndex = 3;
@@ -644,7 +655,7 @@
             // 
             // txtCSPropValue
             // 
-            this.txtCSPropValue.Location = new System.Drawing.Point(366, 27);
+            this.txtCSPropValue.Location = new System.Drawing.Point(465, 30);
             this.txtCSPropValue.Name = "txtCSPropValue";
             this.txtCSPropValue.Size = new System.Drawing.Size(39, 20);
             this.txtCSPropValue.TabIndex = 2;
@@ -671,10 +682,20 @@
             this.boxADChooseMat.Controls.Add(this.btnSetMat);
             this.boxADChooseMat.Location = new System.Drawing.Point(614, 3);
             this.boxADChooseMat.Name = "boxADChooseMat";
-            this.boxADChooseMat.Size = new System.Drawing.Size(560, 502);
+            this.boxADChooseMat.Size = new System.Drawing.Size(560, 517);
             this.boxADChooseMat.TabIndex = 2;
             this.boxADChooseMat.TabStop = false;
             this.boxADChooseMat.Text = "Set Material And Cells";
+            // 
+            // btnDelCell
+            // 
+            this.btnDelCell.Location = new System.Drawing.Point(107, 180);
+            this.btnDelCell.Name = "btnDelCell";
+            this.btnDelCell.Size = new System.Drawing.Size(61, 36);
+            this.btnDelCell.TabIndex = 16;
+            this.btnDelCell.Text = "Dell Cell";
+            this.btnDelCell.UseVisualStyleBackColor = true;
+            this.btnDelCell.Click += new System.EventHandler(this.btnDelCell_Click);
             // 
             // gbCT
             // 
@@ -855,6 +876,7 @@
             // 
             // boxAD
             // 
+            this.boxAD.Controls.Add(this.btnDelDetProp);
             this.boxAD.Controls.Add(this.txtAdDetParams);
             this.boxAD.Controls.Add(this.cmbADDetParamChoose);
             this.boxAD.Controls.Add(this.btnADDetParamValue);
@@ -863,31 +885,31 @@
             this.boxAD.Controls.Add(this.txtADDetName);
             this.boxAD.Location = new System.Drawing.Point(22, 3);
             this.boxAD.Name = "boxAD";
-            this.boxAD.Size = new System.Drawing.Size(509, 216);
+            this.boxAD.Size = new System.Drawing.Size(573, 201);
             this.boxAD.TabIndex = 1;
             this.boxAD.TabStop = false;
             this.boxAD.Text = "Detail";
             // 
             // txtAdDetParams
             // 
-            this.txtAdDetParams.Location = new System.Drawing.Point(187, 45);
+            this.txtAdDetParams.Location = new System.Drawing.Point(204, 46);
             this.txtAdDetParams.Multiline = true;
             this.txtAdDetParams.Name = "txtAdDetParams";
             this.txtAdDetParams.ReadOnly = true;
-            this.txtAdDetParams.Size = new System.Drawing.Size(297, 134);
+            this.txtAdDetParams.Size = new System.Drawing.Size(363, 149);
             this.txtAdDetParams.TabIndex = 5;
             // 
             // cmbADDetParamChoose
             // 
             this.cmbADDetParamChoose.FormattingEnabled = true;
-            this.cmbADDetParamChoose.Location = new System.Drawing.Point(187, 18);
+            this.cmbADDetParamChoose.Location = new System.Drawing.Point(277, 20);
             this.cmbADDetParamChoose.Name = "cmbADDetParamChoose";
             this.cmbADDetParamChoose.Size = new System.Drawing.Size(113, 21);
             this.cmbADDetParamChoose.TabIndex = 4;
             // 
             // btnADDetParamValue
             // 
-            this.btnADDetParamValue.Location = new System.Drawing.Point(420, 17);
+            this.btnADDetParamValue.Location = new System.Drawing.Point(503, 20);
             this.btnADDetParamValue.Name = "btnADDetParamValue";
             this.btnADDetParamValue.Size = new System.Drawing.Size(64, 22);
             this.btnADDetParamValue.TabIndex = 3;
@@ -897,7 +919,7 @@
             // 
             // txtAVDetParamValue
             // 
-            this.txtAVDetParamValue.Location = new System.Drawing.Point(317, 17);
+            this.txtAVDetParamValue.Location = new System.Drawing.Point(396, 22);
             this.txtAVDetParamValue.Name = "txtAVDetParamValue";
             this.txtAVDetParamValue.Size = new System.Drawing.Size(88, 20);
             this.txtAVDetParamValue.TabIndex = 2;
@@ -905,28 +927,84 @@
             // 
             // txtADDetDesc
             // 
-            this.txtADDetDesc.Location = new System.Drawing.Point(6, 45);
+            this.txtADDetDesc.Location = new System.Drawing.Point(7, 46);
             this.txtADDetDesc.Multiline = true;
             this.txtADDetDesc.Name = "txtADDetDesc";
-            this.txtADDetDesc.Size = new System.Drawing.Size(158, 134);
+            this.txtADDetDesc.Size = new System.Drawing.Size(191, 149);
             this.txtADDetDesc.TabIndex = 1;
             // 
             // txtADDetName
             // 
-            this.txtADDetName.Location = new System.Drawing.Point(6, 19);
+            this.txtADDetName.Location = new System.Drawing.Point(6, 20);
             this.txtADDetName.Name = "txtADDetName";
-            this.txtADDetName.Size = new System.Drawing.Size(158, 20);
+            this.txtADDetName.Size = new System.Drawing.Size(191, 20);
             this.txtADDetName.TabIndex = 0;
             // 
-            // btnDelCell
+            // btnDelDetProp
             // 
-            this.btnDelCell.Location = new System.Drawing.Point(107, 180);
-            this.btnDelCell.Name = "btnDelCell";
-            this.btnDelCell.Size = new System.Drawing.Size(61, 36);
-            this.btnDelCell.TabIndex = 16;
-            this.btnDelCell.Text = "Dell Cell";
-            this.btnDelCell.UseVisualStyleBackColor = true;
-            this.btnDelCell.Click += new System.EventHandler(this.btnDelCell_Click);
+            this.btnDelDetProp.Location = new System.Drawing.Point(204, 20);
+            this.btnDelDetProp.Name = "btnDelDetProp";
+            this.btnDelDetProp.Size = new System.Drawing.Size(67, 23);
+            this.btnDelDetProp.TabIndex = 6;
+            this.btnDelDetProp.Text = "Del";
+            this.btnDelDetProp.UseVisualStyleBackColor = true;
+            this.btnDelDetProp.Click += new System.EventHandler(this.btnDelDetProp_Click);
+            // 
+            // btnDelCSProp
+            // 
+            this.btnDelCSProp.Location = new System.Drawing.Point(224, 27);
+            this.btnDelCSProp.Name = "btnDelCSProp";
+            this.btnDelCSProp.Size = new System.Drawing.Size(79, 21);
+            this.btnDelCSProp.TabIndex = 8;
+            this.btnDelCSProp.Text = "Del";
+            this.btnDelCSProp.UseVisualStyleBackColor = true;
+            this.btnDelCSProp.Click += new System.EventHandler(this.btnDelCSProp_Click);
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.Controls.Add(this.btnAddNewProp);
+            this.groupBox4.Controls.Add(this.cmbChooseParentType);
+            this.groupBox4.Controls.Add(this.txtNewPropUnit);
+            this.groupBox4.Controls.Add(this.txtNewPropName);
+            this.groupBox4.Location = new System.Drawing.Point(22, 442);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(503, 78);
+            this.groupBox4.TabIndex = 16;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Add new property";
+            // 
+            // txtNewPropName
+            // 
+            this.txtNewPropName.Location = new System.Drawing.Point(25, 27);
+            this.txtNewPropName.Name = "txtNewPropName";
+            this.txtNewPropName.Size = new System.Drawing.Size(135, 20);
+            this.txtNewPropName.TabIndex = 0;
+            // 
+            // txtNewPropUnit
+            // 
+            this.txtNewPropUnit.Location = new System.Drawing.Point(25, 52);
+            this.txtNewPropUnit.Name = "txtNewPropUnit";
+            this.txtNewPropUnit.Size = new System.Drawing.Size(135, 20);
+            this.txtNewPropUnit.TabIndex = 1;
+            // 
+            // cmbChooseParentType
+            // 
+            this.cmbChooseParentType.FormattingEnabled = true;
+            this.cmbChooseParentType.Location = new System.Drawing.Point(182, 36);
+            this.cmbChooseParentType.Name = "cmbChooseParentType";
+            this.cmbChooseParentType.Size = new System.Drawing.Size(121, 21);
+            this.cmbChooseParentType.TabIndex = 2;
+            // 
+            // btnAddNewProp
+            // 
+            this.btnAddNewProp.Location = new System.Drawing.Point(375, 34);
+            this.btnAddNewProp.Name = "btnAddNewProp";
+            this.btnAddNewProp.Size = new System.Drawing.Size(75, 23);
+            this.btnAddNewProp.TabIndex = 3;
+            this.btnAddNewProp.Text = "Add new property";
+            this.btnAddNewProp.UseMnemonic = false;
+            this.btnAddNewProp.UseVisualStyleBackColor = true;
+            this.btnAddNewProp.Click += new System.EventHandler(this.btnAddNewProp_Click);
             // 
             // Form1
             // 
@@ -964,6 +1042,8 @@
             this.gbCT.PerformLayout();
             this.boxAD.ResumeLayout(false);
             this.boxAD.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1050,6 +1130,13 @@
         private System.Windows.Forms.ComboBox cmbADCellTypes;
         private System.Windows.Forms.TextBox txtADCSDesc;
         private System.Windows.Forms.Button btnDelCell;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Button btnAddNewProp;
+        private System.Windows.Forms.ComboBox cmbChooseParentType;
+        private System.Windows.Forms.TextBox txtNewPropUnit;
+        private System.Windows.Forms.TextBox txtNewPropName;
+        private System.Windows.Forms.Button btnDelCSProp;
+        private System.Windows.Forms.Button btnDelDetProp;
     }
 }
 

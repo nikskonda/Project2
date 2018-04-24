@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Cube.Models;
+using System.Data;
 
 namespace Cube
 {
@@ -15,12 +16,20 @@ namespace Cube
 
     class SQLWorker : ISQLWorker
     {
-        private const String PCname = "NIKITA";
-        private const String DBname = "Project2";
+        private String PCname;
+        private String DBname;
 
+        private SqlConnection sqlConnection;
 
+        public SQLWorker(String PCname, String DBname)
+        {
+            this.PCname = PCname;
+            this.DBname = DBname;
 
-        public SqlConnection GetSqlConnection(string namePC, string nameDB)
+            sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+        }
+
+        private SqlConnection GetSqlConnection(string namePC, string nameDB)
         {           
             StringBuilder sb = new StringBuilder("server = ");
             sb.Append(namePC).Append("; database = ").Append(nameDB).Append("; Integrated Security = true");
@@ -33,8 +42,9 @@ namespace Cube
             List<Detail> details = new List<Detail>();
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("SELECT * from Details", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();             
                 SqlDataReader sDR = sql.ExecuteReader();
 
@@ -56,6 +66,7 @@ namespace Cube
                         details.Add(detail);
                     }
                 }
+                sqlConnection.Close();
             }
             catch (System.Exception ex)
             {
@@ -70,8 +81,9 @@ namespace Cube
             List<int> list = new List<int>();
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("SELECT Id_Cell from CellStructures_Cells WHERE (Id_CellStructure=@IdCS)", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();
                 sql.Parameters.AddWithValue("@IdCS", IdCS);
 
@@ -84,6 +96,7 @@ namespace Cube
                         list.Add(sDR.GetInt32(0));
                     }
                 }
+                sqlConnection.Close();
             }
             catch (System.Exception ex)
             {
@@ -99,10 +112,11 @@ namespace Cube
 
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("SELECT Properties.Id_Property, Properties.[Name], Properties.Unit from Properties " +
                     "left join ParentTypes on Properties.PropertyType = ParentTypes.Id_Type " +
                     "WHERE (ParentTypes.[Name] = @ParentType)", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();
                 sql.Parameters.AddWithValue("@ParentType", parentType.ToString());
 
@@ -119,6 +133,7 @@ namespace Cube
                         list.Add(p);
                     }
                 }
+                sqlConnection.Close();
             }
             catch (System.Exception ex)
             {
@@ -134,11 +149,12 @@ namespace Cube
 
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("SELECT Properties.Id_Property, [Values].Id_Parent, Id_Value, Properties.[Name], [Value],  Properties.Unit from [Values] " +
                     "left join ParentTypes on[Values].Id_ParentType = ParentTypes.Id_Type " +
                     "left join Properties on[Values].Id_Property = Properties.Id_Property " +
                     "WHERE (ParentTypes.[Name] = @ParentType)", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();
                 sql.Parameters.AddWithValue("@ParentType", parentType.ToString());
 
@@ -158,6 +174,7 @@ namespace Cube
                         list.Add(p);
                     }
                 }
+                sqlConnection.Close();
             }
             catch (System.Exception ex)
             {
@@ -172,8 +189,9 @@ namespace Cube
             List<CellStructure> list = new List<CellStructure>();
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("SELECT * from Cellular_Structures", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();
 
                 SqlDataReader sDR = sql.ExecuteReader();
@@ -200,7 +218,8 @@ namespace Cube
 
                         list.Add(cs);
                     }
-                } 
+                }
+                sqlConnection.Close();
             }
             catch (System.Exception ex)
             {
@@ -216,9 +235,10 @@ namespace Cube
 
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("SELECT Cells.Id_Cell, Cells.[Name], Cells.[Description], Cells.Id_Cell_Type, Cell_Types.[Name] from Cells " +
                     "left join Cell_Types on (Cells.Id_Cell_Type=Cell_Types.Id_Cell_Type)", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();
 
                 SqlDataReader sDR = sql.ExecuteReader();
@@ -241,6 +261,7 @@ namespace Cube
                         list.Add(cell);
                     }
                 }
+                sqlConnection.Close();
             }
             catch (System.Exception ex)
             {
@@ -255,10 +276,13 @@ namespace Cube
             List<Material> list = new List<Material>();
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection.Close();
                 SqlCommand sql = new SqlCommand("SELECT * from Materials", sqlConnection);
+                
                 sqlConnection.Open();
 
+                //SqlDataReader sDR = sql.ExecuteReader(CommandBehavior.CloseConnection);
                 SqlDataReader sDR = sql.ExecuteReader();
 
                 if (sDR.HasRows)
@@ -268,12 +292,13 @@ namespace Cube
                         Material material = new Material();
                         material.Id = sDR.GetInt32(0);
                         material.Name = sDR.GetString(1);
-                        material.Description = sDR.GetString(1);
+                        material.Description = sDR.GetString(2);
                         material.Properties = GetPropertyValues(ParentType.Material).FindAll(x => x.IdParent == material.Id);
 
                         list.Add(material);
                     }
                 }
+                sqlConnection.Close();
             }
             catch (System.Exception ex)
             {
@@ -288,8 +313,9 @@ namespace Cube
             List<CellType> list = new List<CellType>();
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("SELECT * from Cell_Types", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();      
                 SqlDataReader sDR = sql.ExecuteReader();
 
@@ -303,6 +329,7 @@ namespace Cube
                         list.Add(ct);
                     }
                 }
+                sqlConnection.Close();
             }
             catch (System.Exception ex)
             {
@@ -317,8 +344,9 @@ namespace Cube
                 bool f = false;
                 try
                 {
-                    SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                    sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                     SqlCommand sql = new SqlCommand("INSERT INTO Cell_Types (Name) VALUES (@name);", sqlConnection);
+                    sqlConnection.Close();
                     sqlConnection.Open();
                     sql.Parameters.AddWithValue("@name", ct.TypeName);
                     sql.ExecuteReader();
@@ -338,8 +366,9 @@ namespace Cube
             int id = 0;
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("SELECT ParentTypes.Id_Type from ParentTypes where(ParentTypes.[Name] = @ParentType)", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();
                 sql.Parameters.AddWithValue("@ParentType", parentType.ToString());
                 SqlDataReader sDR = sql.ExecuteReader();
@@ -351,7 +380,9 @@ namespace Cube
                         id = sDR.GetInt32(0);
                     }
                 }
+                sqlConnection.Close();
             }
+
             catch (System.Exception ex)
             {
                 //DialogManager.showDialogError("Возможна ошибка базы данных! Проверьте!", "Внимание!");
@@ -365,8 +396,9 @@ namespace Cube
             bool f = false;
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("INSERT INTO Materials (Name, Description) VALUES (@name, @desc);", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();
                 sql.Parameters.AddWithValue("@name", m.Name);
                 sql.Parameters.AddWithValue("@desc", m.Description);
@@ -378,8 +410,8 @@ namespace Cube
                 if (newM != null)
                 {
                     f = AddValues(m.Properties, newM.Id, GetIdParentType(ParentType.Material));
-                }          
-                
+                }
+                sqlConnection.Close();
                 f = true;
             }
             catch (System.Exception ex)
@@ -394,8 +426,9 @@ namespace Cube
             bool f = false;
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("INSERT INTO Cells (Id_Cell_Type, Name, Description) VALUES (@idType, @name, @desc);", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();
                 sql.Parameters.AddWithValue("@name", cell.Name);
                 sql.Parameters.AddWithValue("@desc", cell.Description);
@@ -409,7 +442,7 @@ namespace Cube
                 {
                     f = AddValues(cell.Properties, newC.Id, GetIdParentType(ParentType.Cell));
                 }
-
+                sqlConnection.Close();
                 f = true;
             }
             catch (System.Exception ex)
@@ -440,8 +473,9 @@ namespace Cube
             bool f = false;
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand sql = new SqlCommand("INSERT INTO [Values] (Id_Property, Id_Parent, [Value], Id_ParentType) VALUES (@idProp, @idparent, @value, @idParType);", sqlConnection);
+                sqlConnection.Close();
                 sqlConnection.Open();
                 sql.Parameters.AddWithValue("@idProp", p.Id);
                 sql.Parameters.AddWithValue("@idparent", p.IdParent);
@@ -466,12 +500,12 @@ namespace Cube
             {
                 foreach (Cell c in cellStr.Cells)
                 {
-                    SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                    sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                     SqlCommand sql = new SqlCommand("INSERT INTO CellStructures_Cells (Id_Cell, Id_CellStructure) VALUES (@cell, @cs);", sqlConnection);
+                    sqlConnection.Close();
                     sqlConnection.Open();
                     sql.Parameters.AddWithValue("@cs", cellStr.Id);
                     sql.Parameters.AddWithValue("@cell", c.Id);
-
                     sql.ExecuteReader();
                     sqlConnection.Close();                 
                 }
@@ -489,7 +523,7 @@ namespace Cube
             bool f = false;
             try
             {
-                SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                 SqlCommand cmd = new SqlCommand("InsertCS", sqlConnection);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -499,26 +533,16 @@ namespace Cube
                 cmd.Parameters.Add(new SqlParameter("@idCS", System.Data.SqlDbType.Int, 8));
                 cmd.Parameters["@idCS"].Direction = System.Data.ParameterDirection.Output;
 
+                sqlConnection.Close();
                 sqlConnection.Open();
                 cmd.ExecuteNonQuery();
 
                 cs.Id = (int)cmd.Parameters["@idCS"].Value;
 
-                //SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
-                //SqlCommand sql = new SqlCommand("INSERT INTO Cellular_Structures (Description) VALUES (@desc);", sqlConnection);
-                //sqlConnection.Open();
-                //sql.Parameters.AddWithValue("@desc", cs.Description);
-                //sql.ExecuteReader();
-                //sqlConnection.Close();
+                f = AddValues(cs.Properties, cs.Id, GetIdParentType(ParentType.CelluralStructure));
+                f = AddListCells(cs);
 
-                //CellStructure newCS = GetCellStructures().FindLast(x => x.Description.Equals(cs.Description));
-                //if (newCS != null)
-                {
-                    f = AddValues(cs.Properties, cs.Id, GetIdParentType(ParentType.CelluralStructure));
-                    //cs.Id = newCS.Id;
-                    f = AddListCells(cs);
-                }
-
+                sqlConnection.Close();
                 f = true;
             }
             catch (System.Exception ex)
@@ -538,7 +562,7 @@ namespace Cube
                     CellStructure newCS = GetCellStructures().FindLast(x => x.Description.Equals(detail.CellStructure.Description));
                     if (newCS != null)
                     {
-                        SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
+                        sqlConnection = GetSqlConnection(this.PCname, this.DBname);
                         SqlCommand cmd = new SqlCommand("InsertDetail", sqlConnection);
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -557,6 +581,7 @@ namespace Cube
                         cmd.Parameters.Add(new SqlParameter("@idDetail", System.Data.SqlDbType.Int, 8));
                         cmd.Parameters["@idDetail"].Direction = System.Data.ParameterDirection.Output;
 
+                        sqlConnection.Close();
                         sqlConnection.Open();
                         cmd.ExecuteNonQuery();
 
@@ -565,22 +590,11 @@ namespace Cube
 
                         detail.CellStructure.Id = newCS.Id;
 
-                        //SqlConnection sqlConnection = GetSqlConnection(SQLWorker.PCname, SQLWorker.DBname);
-                        //SqlCommand sql = new SqlCommand("INSERT INTO Details(Name, Description, Id_CellStructure, Id_Material) VALUES (@name, @desc, @idCS, @idMat);", sqlConnection);
-                        //sqlConnection.Open();
-                        //sql.Parameters.AddWithValue("@name", detail.Name);
-                        //sql.Parameters.AddWithValue("@desc", detail.Description);
-                        //sql.Parameters.AddWithValue("@idCS", detail.CellStructure.Id);
-                        //sql.Parameters.AddWithValue("@idMat", detail.Material.Id);
-                        //sql.ExecuteReader();
-                        //sqlConnection.Close();
-
-                        //Detail newD = GetDetails().FindLast(x => (x.Name.Equals(detail.Name) && x.Description.Equals(detail.Description)));
-                        //if (newD != null)
+                        
                         {
                             f = AddValues(detail.Properties, detail.Id, GetIdParentType(ParentType.Detail));
                         }
-
+                        sqlConnection.Close();
                         f = true;
                     }            
                 }
@@ -594,7 +608,31 @@ namespace Cube
             return f;
         }
 
-        
+        public bool AddProperty(Property p, ParentType parentType)
+        {
+            bool f = false;
+            try
+            {
+                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                SqlCommand sql = new SqlCommand("INSERT INTO Properties ([Name], Unit, PropertyType) VALUES (@name, @unit, @parentType);", sqlConnection);
+                sqlConnection.Close();
+                sqlConnection.Open();
+                sql.Parameters.AddWithValue("@name", p.Name);
+                sql.Parameters.AddWithValue("@unit", p.Unit);
+                sql.Parameters.AddWithValue("@parentType", GetIdParentType(parentType));
+                sql.ExecuteReader();
+                sqlConnection.Close();
+                f = true;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return f;
+
+        }
+
+
 
     }
 }
