@@ -28,7 +28,7 @@ namespace Cube.Models
             Name = "Unknown";
             Description = "Unknown";
             Properties = new List<Property>();
-        }
+        }        
 
         public Detail(int id, Material material, CellStructure cS, string name, string description, List<Property> property)
         {

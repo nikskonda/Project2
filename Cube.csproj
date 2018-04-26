@@ -61,6 +61,7 @@
     <Compile Include="AddPropertyPage.Designer.cs">
       <DependentUpon>AddPropertyPage.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataSetWorker.cs" />
     <Compile Include="DialogManager.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
@@ -69,6 +70,12 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="Cells.cs" />
+    <Compile Include="Form2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form2.Designer.cs">
+      <DependentUpon>Form2.cs</DependentUpon>
+    </Compile>
     <Compile Include="ISQLWorker.cs" />
     <Compile Include="Models\Cell.cs" />
     <Compile Include="Models\CellStructure.cs" />
@@ -83,6 +90,9 @@
     <Compile Include="SQLWorker.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form2.resx">
+      <DependentUpon>Form2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

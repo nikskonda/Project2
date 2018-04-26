@@ -95,10 +95,12 @@ namespace Cube.Models
                 {
                     f = false;
                 }
+                if (this.Value != null && pr.Value != null)
                 if (!this.Value.Equals(pr.Value))
                 {
                     f = false;
                 }
+
                 return f;
             }
 

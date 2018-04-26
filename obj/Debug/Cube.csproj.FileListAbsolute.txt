@@ -29,3 +29,4 @@ d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csproj.Generat
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csproj.CoreCompileInputs.cache
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.exe
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.pdb
+D:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.Form2.resources

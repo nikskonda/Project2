@@ -63,9 +63,9 @@ namespace Cube
 
             loadCells();
 
-            loadDetailProperty();
+            loadDetailProperty(cmbADDetParamChoose);
 
-            loadCSProperty();
+            loadCSProperty(cmbCSProp);
 
             foreach (ParentType p in Enum.GetValues(typeof(ParentType)))
             {
@@ -88,7 +88,7 @@ namespace Cube
         {
             csProperties.Clear();
             csProperties = sqlWorker.GetProperties(ParentType.CelluralStructure);
-
+            cmb.Items.Clear();
             foreach (Property p in csProperties)
             {
                 cmb.Items.Add(p.GetStringNameAndUnit());
@@ -142,7 +142,6 @@ namespace Cube
         public void loadCells()
         {
             cmbADCellChoose.Items.Clear();
-
 
             List<Cell> list = sqlWorker.GetCells();
             foreach (Cell c in list)
@@ -761,8 +760,7 @@ namespace Cube
         //del cs prop
         private void btnDelCSProp_Click(object sender, EventArgs e)
         {
-            string txt = txtCSPropValue.Text;
-            if ((IsNumber(txt)) && (!IsNull(cmbCSProp)))
+            if ((!IsNull(cmbCSProp)))
             {
 
                 Property p = newDetail.CellStructure.Properties.FindLast(x => x.GetStringNameAndUnit().Equals(cmbCSProp.SelectedItem.ToString()));
@@ -982,6 +980,29 @@ namespace Cube
                 DialogManager.showDialogError("Error value");
             }
         }
+        //del obj prop
+        private void btnDelObjProp_Click(object sender, EventArgs e)
+        {
+            if ((!IsNull(cmbADAddProp)))
+            {
+
+                Property p = objProperties.FindLast(x => x.GetStringNameAndUnit().Equals(cmbADAddProp.SelectedItem.ToString()));
+                if (p != null)
+                {
+
+                    objProperties.Remove(p);
+                    printListProperties(txtADAddProp, objProperties);
+                }
+                else
+                {
+                    DialogManager.showDialogError("Property 404");
+                }
+            }
+            else
+            {
+                DialogManager.showDialogError("Chooce property");
+            }
+        }
 
         //clear all fields
         private void ClearAddDetailPage()
@@ -1071,7 +1092,11 @@ namespace Cube
             //    return;
             //}
 
-            
+            //if (newDetail.CellStructure.Cells.Count == 0)
+            //{
+            //    DialogManager.showDialogError("Empty Cells");
+            //    return;
+            //}
 
             if (newDetail != null)
             { 
@@ -1190,39 +1215,105 @@ namespace Cube
                     {
                         return;
                     }
-                    ParentType pt = new ParentType();
+                }   
                     string txt = cmbChooseParentType.SelectedItem.ToString();
                     
+
+
                     Property p = new Property(txtNewPropName.Text, txtNewPropUnit.Text);
-                    sqlWorker.AddProperty(p, pt);
+
+
+                    if (ConvertToParentType(txt)==null)
+                    {
+                        DialogManager.showDialogError("Empty fields");
+                        return;
+                    }
+                    ParentType pt = (ParentType)ConvertToParentType(txt);                  
 
                     switch (pt)
                     {
                         case ParentType.Detail:
-                            loadDetailProperty();
+                            foreach (Property prop in detProperties)
+                            {
+                                if (p.GetStringNameAndUnit().Equals(prop.GetStringNameAndUnit()))
+                                {
+                                    DialogManager.showDialogError("Repeat property");
+                                    return;
+                                }
+                            }
+                            sqlWorker.AddProperty(p, pt);
+                            loadDetailProperty(cmbADDetParamChoose);
                             break;
                         case ParentType.Material:
                             if (chooseMaterial.Checked)
                             {
                                 loadMaterialProperty(cmbADAddProp);
+                                foreach (Property prop in detProperties)
+                                {
+                                    if (p.GetStringNameAndUnit().Equals(prop.GetStringNameAndUnit()))
+                                    {
+                                        DialogManager.showDialogError("Repeat property");
+                                        return;
+                                    }
+                                }
+                                sqlWorker.AddProperty(p, pt);
                             }
                             break;
                         case ParentType.Cell:
                             if (chooseCell.Checked)
                             {
                                 loadCellProperty(cmbADAddProp);
+                                foreach (Property prop in detProperties)
+                                {
+                                    if (p.GetStringNameAndUnit().Equals(prop.GetStringNameAndUnit()))
+                                    {
+                                        DialogManager.showDialogError("Repeat property");
+                                        return;
+                                    }
+                                }
+                                sqlWorker.AddProperty(p, pt);
                             }
                             break;
                         case ParentType.CelluralStructure:
-                            loadCSProperty();
+                            foreach (Property prop in detProperties)
+                            {
+                                if (p.GetStringNameAndUnit().Equals(prop.GetStringNameAndUnit()))
+                                { 
+                                DialogManager.showDialogError("Repeat property");
+                                    return;
+                                }
+                            }
+                            sqlWorker.AddProperty(p, pt);
+                            loadCSProperty(cmbCSProp);
                             break;
                     }
 
-                }
+                
+
             } else
             {
                 DialogManager.showDialogError("Empty fields");
             }
+        }
+
+        private Object ConvertToParentType(String str)
+        {
+            foreach (ParentType pt in Enum.GetValues(typeof(ParentType)))
+            {
+                if (str.Equals(pt.ToString()))
+                {
+                    return pt;
+                }
+            }
+            return null;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Form2 f = new Form2();
+            f.ShowDialog();
+
+            f.Close();
         }
     }
 }
