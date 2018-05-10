@@ -23,7 +23,7 @@ namespace Cube
         private SketchManager swSketchManager;
         private SelectionMgr swSelMgr;
 
-        SQLWorker sqlWorker = new SQLWorker("NIKITA", "Project2");
+        SQLWorker sqlWorker;
 
         Cells h;
 
@@ -42,8 +42,9 @@ namespace Cube
         //List<Cell> cells;
         List<Material> materials= new List<Material>();
 
-        public Form1()
+        public Form1(String ServerName, String DataBaseName)
         {
+            sqlWorker = new SQLWorker(ServerName, DataBaseName);
             InitializeComponent();
         }
 

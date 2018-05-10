@@ -21,18 +21,60 @@ namespace Cube
 
         private SqlConnection sqlConnection;
 
+        public static bool IsCreate(String PCname, String DBname)
+        {          
+            try
+            {
+                StringBuilder sb = new StringBuilder("server = ");
+                sb.Append(PCname).Append("; Integrated Security = true");
+                SqlConnection sqlConnection = new SqlConnection(sb.ToString());               
+                SqlCommand sql = new SqlCommand("if db_id(@name) is not null select 'true' else select 'false'", sqlConnection);
+                sqlConnection.Open();
+                sql.Parameters.AddWithValue("@name", DBname);
+                SqlDataReader sDR = sql.ExecuteReader();
+                String result = "false";
+                if (sDR.HasRows)
+                {
+                    while (sDR.Read())
+                    {
+                        result = sDR.GetString(0);                        
+                    }
+                }
+                sqlConnection.Close();
+                if (result.Equals("true"))
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+        }
+
         public SQLWorker(String PCname, String DBname)
         {
             this.PCname = PCname;
             this.DBname = DBname;
-
-            sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+            if (IsCreate(this.PCname, this.DBname))
+            {
+                sqlConnection = GetSqlConnection();
+            }
+            else
+            {
+                DialogManager.showDialogError("Connection error");
+            }
         }
 
-        private SqlConnection GetSqlConnection(string namePC, string nameDB)
+        private SqlConnection GetSqlConnection()
         {           
             StringBuilder sb = new StringBuilder("server = ");
-            sb.Append(namePC).Append("; database = ").Append(nameDB).Append("; Integrated Security = true");
+            sb.Append(this.PCname).Append("; database = ").Append(this.DBname).Append("; Integrated Security = true");
             SqlConnection sql = new SqlConnection(sb.ToString());
             return sql;
         }
@@ -42,7 +84,7 @@ namespace Cube
             List<Detail> details = new List<Detail>();
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("SELECT * from Details", sqlConnection);
                 sqlConnection.Close();
                 sqlConnection.Open();             
@@ -81,7 +123,7 @@ namespace Cube
             List<int> list = new List<int>();
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("SELECT Id_Cell from CellStructures_Cells WHERE (Id_CellStructure=@IdCS)", sqlConnection);
                 sqlConnection.Close();
                 sqlConnection.Open();
@@ -112,7 +154,7 @@ namespace Cube
 
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("SELECT Properties.Id_Property, Properties.[Name], Properties.Unit from Properties " +
                     "left join ParentTypes on Properties.PropertyType = ParentTypes.Id_Type " +
                     "WHERE (ParentTypes.[Name] = @ParentType)", sqlConnection);
@@ -149,7 +191,7 @@ namespace Cube
 
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("SELECT Properties.Id_Property, [Values].Id_Parent, Id_Value, Properties.[Name], [Value],  Properties.Unit from [Values] " +
                     "left join ParentTypes on[Values].Id_ParentType = ParentTypes.Id_Type " +
                     "left join Properties on[Values].Id_Property = Properties.Id_Property " +
@@ -189,7 +231,7 @@ namespace Cube
             List<CellStructure> list = new List<CellStructure>();
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("SELECT * from Cellular_Structures", sqlConnection);
                 sqlConnection.Close();
                 sqlConnection.Open();
@@ -235,7 +277,7 @@ namespace Cube
 
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("SELECT Cells.Id_Cell, Cells.[Name], Cells.[Description], Cells.Id_Cell_Type, Cell_Types.[Name] from Cells " +
                     "left join Cell_Types on (Cells.Id_Cell_Type=Cell_Types.Id_Cell_Type)", sqlConnection);
                 sqlConnection.Close();
@@ -276,7 +318,7 @@ namespace Cube
             List<Material> list = new List<Material>();
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 sqlConnection.Close();
                 SqlCommand sql = new SqlCommand("SELECT * from Materials", sqlConnection);
                 
@@ -313,7 +355,7 @@ namespace Cube
             List<CellType> list = new List<CellType>();
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("SELECT * from Cell_Types", sqlConnection);
                 sqlConnection.Close();
                 sqlConnection.Open();      
@@ -344,7 +386,7 @@ namespace Cube
                 bool f = false;
                 try
                 {
-                    sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                    sqlConnection = GetSqlConnection();
                     SqlCommand sql = new SqlCommand("INSERT INTO Cell_Types (Name) VALUES (@name);", sqlConnection);
                     sqlConnection.Close();
                     sqlConnection.Open();
@@ -366,7 +408,7 @@ namespace Cube
             int id = 0;
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("SELECT ParentTypes.Id_Type from ParentTypes where(ParentTypes.[Name] = @ParentType)", sqlConnection);
                 sqlConnection.Close();
                 sqlConnection.Open();
@@ -396,7 +438,7 @@ namespace Cube
             bool f = false;
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("INSERT INTO Materials (Name, Description) VALUES (@name, @desc);", sqlConnection);
                 sqlConnection.Close();
                 sqlConnection.Open();
@@ -426,7 +468,7 @@ namespace Cube
             bool f = false;
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("INSERT INTO Cells (Id_Cell_Type, Name, Description) VALUES (@idType, @name, @desc);", sqlConnection);
                 sqlConnection.Close();
                 sqlConnection.Open();
@@ -473,7 +515,7 @@ namespace Cube
             bool f = false;
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("INSERT INTO [Values] (Id_Property, Id_Parent, [Value], Id_ParentType) VALUES (@idProp, @idparent, @value, @idParType);", sqlConnection);
                 sqlConnection.Close();
                 sqlConnection.Open();
@@ -500,7 +542,7 @@ namespace Cube
             {
                 foreach (Cell c in cellStr.Cells)
                 {
-                    sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                    sqlConnection = GetSqlConnection();
                     SqlCommand sql = new SqlCommand("INSERT INTO CellStructures_Cells (Id_Cell, Id_CellStructure) VALUES (@cell, @cs);", sqlConnection);
                     sqlConnection.Close();
                     sqlConnection.Open();
@@ -523,7 +565,7 @@ namespace Cube
             bool f = false;
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand cmd = new SqlCommand("InsertCS", sqlConnection);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -562,7 +604,7 @@ namespace Cube
                     CellStructure newCS = GetCellStructures().FindLast(x => x.Description.Equals(detail.CellStructure.Description));
                     if (newCS != null)
                     {
-                        sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                        sqlConnection = GetSqlConnection();
                         SqlCommand cmd = new SqlCommand("InsertDetail", sqlConnection);
                         cmd.CommandType = System.Data.CommandType.StoredProcedure;
 
@@ -613,7 +655,7 @@ namespace Cube
             bool f = false;
             try
             {
-                sqlConnection = GetSqlConnection(this.PCname, this.DBname);
+                sqlConnection = GetSqlConnection();
                 SqlCommand sql = new SqlCommand("INSERT INTO Properties ([Name], Unit, PropertyType) VALUES (@name, @unit, @parentType);", sqlConnection);
                 sqlConnection.Close();
                 sqlConnection.Open();
@@ -632,7 +674,108 @@ namespace Cube
 
         }
 
+        public static bool createDataBase(String PCname, String DBname)
+        {
+            bool f = false;
+            StringBuilder sb = new StringBuilder("server = ");
+            sb.Append(PCname).Append("; Integrated Security = true");
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(sb.ToString());
 
+                DBCreater db = new DBCreater(DBname);
+                
+                    SqlCommand sql = new SqlCommand(db.getCreateDBSting(), sqlConnection);
+                    sqlConnection.Open();
+                    sql.ExecuteReader();
+                    sqlConnection.Close();
+                f = true;
+                SQLWorker w = new SQLWorker(PCname, DBname);
+                f = addNewTables(w) && addStoreProc(w);
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            return f;
+        }
 
+        private static bool addStoreProc(SQLWorker worker)
+        {
+            bool f = false;
+            try
+            {
+                DBCreater db = new DBCreater(worker.DBname);
+                List<String> list = db.getListProc();
+                SqlConnection con = worker.GetSqlConnection();
+                foreach (String str in list)
+                {
+                    SqlCommand sql = new SqlCommand(str, con);
+                    //sql.CommandType = CommandType.StoredProcedure;
+                    con.Open();
+                    sql.ExecuteReader();
+                    con.Close();
+                }
+                f = true;
+
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            return f;
+        }
+
+        private static bool addNewTables(SQLWorker worker)
+        {
+            bool f = false;
+            try
+            {
+                DBCreater db = new DBCreater(worker.DBname);
+                List<String> list = db.getList();
+                SqlConnection con = worker.GetSqlConnection();
+                foreach (String str in list)
+                {
+                    SqlCommand sql = new SqlCommand(str, con);
+                    con.Open();
+                    sql.ExecuteReader();
+                    con.Close();
+                }
+                f = true;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            return f;
+        }
+
+        public static bool delDB(String PCname, String DBname)
+        {
+            bool f = false;
+            StringBuilder sb = new StringBuilder("server = ");
+            sb.Append(PCname).Append("; Integrated Security = true");
+            try
+            {
+                SqlConnection sqlConnection = new SqlConnection(sb.ToString());
+
+                {
+                    SqlCommand sql = new SqlCommand("USE master DROP DATABASE "+DBname, sqlConnection);
+                    sqlConnection.Open();
+                    sql.ExecuteReader();
+                    sqlConnection.Close();
+                }
+                f = true;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+                return false;
+            }
+            return f;
+        }
     }
 }
