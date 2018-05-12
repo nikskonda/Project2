@@ -1,6 +1,6 @@
 ﻿namespace Cube
 {
-    partial class Form1
+    partial class DataViewPage
     {
         /// <summary>
         /// Required designer variable.
@@ -29,37 +29,7 @@
         private void InitializeComponent()
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.ColumnNum = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.RowNum = new System.Windows.Forms.TextBox();
-            this.NonIter = new System.Windows.Forms.RadioButton();
-            this.IterCheck = new System.Windows.Forms.RadioButton();
-            this.label4 = new System.Windows.Forms.Label();
-            this.Iteration = new System.Windows.Forms.TextBox();
-            this.button2 = new System.Windows.Forms.Button();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.FractionCheck = new System.Windows.Forms.RadioButton();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.multiplierCheck = new System.Windows.Forms.RadioButton();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
-            this.CBox = new System.Windows.Forms.TextBox();
-            this.BBox = new System.Windows.Forms.TextBox();
-            this.ABox = new System.Windows.Forms.TextBox();
-            this.ParalRadButton = new System.Windows.Forms.RadioButton();
-            this.cubeRadButton = new System.Windows.Forms.RadioButton();
-            this.button1 = new System.Windows.Forms.Button();
             this.tabViewDetail = new System.Windows.Forms.TabPage();
-            this.button3 = new System.Windows.Forms.Button();
             this.boxVDCell = new System.Windows.Forms.GroupBox();
             this.lblVSChooseCell = new System.Windows.Forms.Label();
             this.cmbVDChooseCell = new System.Windows.Forms.ComboBox();
@@ -138,10 +108,6 @@
             this.txtADDetDesc = new System.Windows.Forms.TextBox();
             this.txtADDetName = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
             this.tabViewDetail.SuspendLayout();
             this.boxVDCell.SuspendLayout();
             this.boxVDCS.SuspendLayout();
@@ -158,7 +124,6 @@
             // 
             // tabControl1
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabViewDetail);
             this.tabControl1.Controls.Add(this.tabAddDetail);
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
@@ -167,299 +132,8 @@
             this.tabControl1.Size = new System.Drawing.Size(1321, 580);
             this.tabControl1.TabIndex = 8;
             // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.groupBox3);
-            this.tabPage1.Controls.Add(this.button2);
-            this.tabPage1.Controls.Add(this.groupBox2);
-            this.tabPage1.Controls.Add(this.textBox5);
-            this.tabPage1.Controls.Add(this.groupBox1);
-            this.tabPage1.Controls.Add(this.button1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1313, 554);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "Old";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // groupBox3
-            // 
-            this.groupBox3.Controls.Add(this.label8);
-            this.groupBox3.Controls.Add(this.ColumnNum);
-            this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.RowNum);
-            this.groupBox3.Controls.Add(this.NonIter);
-            this.groupBox3.Controls.Add(this.IterCheck);
-            this.groupBox3.Controls.Add(this.label4);
-            this.groupBox3.Controls.Add(this.Iteration);
-            this.groupBox3.Location = new System.Drawing.Point(17, 196);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(570, 100);
-            this.groupBox3.TabIndex = 13;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Отверстия";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(415, 68);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(49, 13);
-            this.label8.TabIndex = 8;
-            this.label8.Text = "Столбец";
-            // 
-            // ColumnNum
-            // 
-            this.ColumnNum.Location = new System.Drawing.Point(470, 65);
-            this.ColumnNum.Name = "ColumnNum";
-            this.ColumnNum.Size = new System.Drawing.Size(94, 20);
-            this.ColumnNum.TabIndex = 9;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(261, 68);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(43, 13);
-            this.label7.TabIndex = 6;
-            this.label7.Text = "Строка";
-            // 
-            // RowNum
-            // 
-            this.RowNum.Location = new System.Drawing.Point(310, 65);
-            this.RowNum.Name = "RowNum";
-            this.RowNum.Size = new System.Drawing.Size(94, 20);
-            this.RowNum.TabIndex = 7;
-            this.RowNum.TextChanged += new System.EventHandler(this.RowNum_TextChanged);
-            // 
-            // NonIter
-            // 
-            this.NonIter.AutoSize = true;
-            this.NonIter.Location = new System.Drawing.Point(231, 29);
-            this.NonIter.Name = "NonIter";
-            this.NonIter.Size = new System.Drawing.Size(139, 17);
-            this.NonIter.TabIndex = 5;
-            this.NonIter.TabStop = true;
-            this.NonIter.Text = "Количество отверстий";
-            this.NonIter.UseVisualStyleBackColor = true;
-            this.NonIter.CheckedChanged += new System.EventHandler(this.NonIter_CheckedChanged);
-            // 
-            // IterCheck
-            // 
-            this.IterCheck.AutoSize = true;
-            this.IterCheck.Location = new System.Drawing.Point(21, 29);
-            this.IterCheck.Name = "IterCheck";
-            this.IterCheck.Size = new System.Drawing.Size(109, 17);
-            this.IterCheck.TabIndex = 4;
-            this.IterCheck.TabStop = true;
-            this.IterCheck.Text = "Номер итерации";
-            this.IterCheck.UseVisualStyleBackColor = true;
-            this.IterCheck.CheckedChanged += new System.EventHandler(this.IterCheck_CheckedChanged);
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(18, 68);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(91, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Номер итерации";
-            // 
-            // Iteration
-            // 
-            this.Iteration.Location = new System.Drawing.Point(115, 65);
-            this.Iteration.Name = "Iteration";
-            this.Iteration.Size = new System.Drawing.Size(94, 20);
-            this.Iteration.TabIndex = 3;
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(379, 142);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(93, 32);
-            this.button2.TabIndex = 12;
-            this.button2.Text = "Чертить";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.label6);
-            this.groupBox2.Controls.Add(this.label5);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.FractionCheck);
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Controls.Add(this.multiplierCheck);
-            this.groupBox2.Location = new System.Drawing.Point(16, 302);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(420, 99);
-            this.groupBox2.TabIndex = 11;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Объём отверстия";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(220, 65);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(26, 13);
-            this.label6.TabIndex = 9;
-            this.label6.Text = "B = ";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 65);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(26, 13);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "A = ";
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(311, 62);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 8;
-            // 
-            // FractionCheck
-            // 
-            this.FractionCheck.AutoSize = true;
-            this.FractionCheck.Location = new System.Drawing.Point(232, 31);
-            this.FractionCheck.Name = "FractionCheck";
-            this.FractionCheck.Size = new System.Drawing.Size(58, 17);
-            this.FractionCheck.TabIndex = 9;
-            this.FractionCheck.Text = "Дробь";
-            this.FractionCheck.UseVisualStyleBackColor = true;
-            this.FractionCheck.CheckedChanged += new System.EventHandler(this.fractionCheck_CheckedChanged);
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(80, 62);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 8;
-            // 
-            // multiplierCheck
-            // 
-            this.multiplierCheck.AutoSize = true;
-            this.multiplierCheck.Location = new System.Drawing.Point(22, 31);
-            this.multiplierCheck.Name = "multiplierCheck";
-            this.multiplierCheck.Size = new System.Drawing.Size(83, 17);
-            this.multiplierCheck.TabIndex = 8;
-            this.multiplierCheck.Text = "Множитель";
-            this.multiplierCheck.UseVisualStyleBackColor = true;
-            this.multiplierCheck.CheckedChanged += new System.EventHandler(this.multiplierCheck_CheckedChanged);
-            // 
-            // textBox5
-            // 
-            this.textBox5.Location = new System.Drawing.Point(442, 302);
-            this.textBox5.Multiline = true;
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(145, 99);
-            this.textBox5.TabIndex = 10;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.CBox);
-            this.groupBox1.Controls.Add(this.BBox);
-            this.groupBox1.Controls.Add(this.ABox);
-            this.groupBox1.Controls.Add(this.ParalRadButton);
-            this.groupBox1.Controls.Add(this.cubeRadButton);
-            this.groupBox1.Location = new System.Drawing.Point(16, 18);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(571, 107);
-            this.groupBox1.TabIndex = 9;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Деталь";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(423, 69);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(26, 13);
-            this.label3.TabIndex = 7;
-            this.label3.Text = "C = ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(229, 69);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(26, 13);
-            this.label2.TabIndex = 6;
-            this.label2.Text = "B = ";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 69);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(26, 13);
-            this.label1.TabIndex = 5;
-            this.label1.Text = "A = ";
-            // 
-            // CBox
-            // 
-            this.CBox.Location = new System.Drawing.Point(455, 66);
-            this.CBox.Name = "CBox";
-            this.CBox.Size = new System.Drawing.Size(100, 20);
-            this.CBox.TabIndex = 4;
-            // 
-            // BBox
-            // 
-            this.BBox.Location = new System.Drawing.Point(278, 66);
-            this.BBox.Name = "BBox";
-            this.BBox.Size = new System.Drawing.Size(100, 20);
-            this.BBox.TabIndex = 3;
-            // 
-            // ABox
-            // 
-            this.ABox.Location = new System.Drawing.Point(60, 66);
-            this.ABox.Name = "ABox";
-            this.ABox.Size = new System.Drawing.Size(100, 20);
-            this.ABox.TabIndex = 2;
-            // 
-            // ParalRadButton
-            // 
-            this.ParalRadButton.AutoSize = true;
-            this.ParalRadButton.Location = new System.Drawing.Point(232, 30);
-            this.ParalRadButton.Name = "ParalRadButton";
-            this.ParalRadButton.Size = new System.Drawing.Size(105, 17);
-            this.ParalRadButton.TabIndex = 1;
-            this.ParalRadButton.Text = "Паралелепипед";
-            this.ParalRadButton.UseVisualStyleBackColor = true;
-            this.ParalRadButton.CheckedChanged += new System.EventHandler(this.ParalRadButton_CheckedChanged);
-            // 
-            // cubeRadButton
-            // 
-            this.cubeRadButton.AutoSize = true;
-            this.cubeRadButton.Location = new System.Drawing.Point(22, 30);
-            this.cubeRadButton.Name = "cubeRadButton";
-            this.cubeRadButton.Size = new System.Drawing.Size(43, 17);
-            this.cubeRadButton.TabIndex = 0;
-            this.cubeRadButton.Text = "Куб";
-            this.cubeRadButton.UseVisualStyleBackColor = true;
-            this.cubeRadButton.CheckedChanged += new System.EventHandler(this.cubeRadButton_CheckedChanged);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(478, 142);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(93, 32);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Высчитать";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button2_Click);
-            // 
             // tabViewDetail
             // 
-            this.tabViewDetail.Controls.Add(this.button3);
             this.tabViewDetail.Controls.Add(this.boxVDCell);
             this.tabViewDetail.Controls.Add(this.boxVDCS);
             this.tabViewDetail.Controls.Add(this.boxDVMaterial);
@@ -472,24 +146,14 @@
             this.tabViewDetail.Text = "ViewDetail";
             this.tabViewDetail.UseVisualStyleBackColor = true;
             // 
-            // button3
-            // 
-            this.button3.Location = new System.Drawing.Point(1195, 471);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(98, 39);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
-            // 
             // boxVDCell
             // 
             this.boxVDCell.Controls.Add(this.lblVSChooseCell);
             this.boxVDCell.Controls.Add(this.cmbVDChooseCell);
             this.boxVDCell.Controls.Add(this.txtVDCellInfo);
-            this.boxVDCell.Location = new System.Drawing.Point(619, 263);
+            this.boxVDCell.Location = new System.Drawing.Point(675, 266);
             this.boxVDCell.Name = "boxVDCell";
-            this.boxVDCell.Size = new System.Drawing.Size(541, 248);
+            this.boxVDCell.Size = new System.Drawing.Size(620, 285);
             this.boxVDCell.TabIndex = 2;
             this.boxVDCell.TabStop = false;
             this.boxVDCell.Text = "Cell";
@@ -514,12 +178,12 @@
             // 
             // txtVDCellInfo
             // 
-            this.txtVDCellInfo.Location = new System.Drawing.Point(218, 33);
+            this.txtVDCellInfo.Location = new System.Drawing.Point(197, 19);
             this.txtVDCellInfo.Multiline = true;
             this.txtVDCellInfo.Name = "txtVDCellInfo";
             this.txtVDCellInfo.ReadOnly = true;
             this.txtVDCellInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtVDCellInfo.Size = new System.Drawing.Size(302, 188);
+            this.txtVDCellInfo.Size = new System.Drawing.Size(417, 254);
             this.txtVDCellInfo.TabIndex = 4;
             // 
             // boxVDCS
@@ -527,39 +191,39 @@
             this.boxVDCS.Controls.Add(this.txtVDCSInfo);
             this.boxVDCS.Location = new System.Drawing.Point(18, 263);
             this.boxVDCS.Name = "boxVDCS";
-            this.boxVDCS.Size = new System.Drawing.Size(541, 248);
+            this.boxVDCS.Size = new System.Drawing.Size(620, 285);
             this.boxVDCS.TabIndex = 1;
             this.boxVDCS.TabStop = false;
             this.boxVDCS.Text = "Cellular Strusture";
             // 
             // txtVDCSInfo
             // 
-            this.txtVDCSInfo.Location = new System.Drawing.Point(42, 33);
+            this.txtVDCSInfo.Location = new System.Drawing.Point(6, 19);
             this.txtVDCSInfo.Multiline = true;
             this.txtVDCSInfo.Name = "txtVDCSInfo";
             this.txtVDCSInfo.ReadOnly = true;
             this.txtVDCSInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtVDCSInfo.Size = new System.Drawing.Size(482, 188);
+            this.txtVDCSInfo.Size = new System.Drawing.Size(608, 257);
             this.txtVDCSInfo.TabIndex = 5;
             // 
             // boxDVMaterial
             // 
             this.boxDVMaterial.Controls.Add(this.txtVDMaterialInfo);
-            this.boxDVMaterial.Location = new System.Drawing.Point(619, 19);
+            this.boxDVMaterial.Location = new System.Drawing.Point(675, 6);
             this.boxDVMaterial.Name = "boxDVMaterial";
-            this.boxDVMaterial.Size = new System.Drawing.Size(541, 226);
+            this.boxDVMaterial.Size = new System.Drawing.Size(620, 254);
             this.boxDVMaterial.TabIndex = 1;
             this.boxDVMaterial.TabStop = false;
             this.boxDVMaterial.Text = "Material";
             // 
             // txtVDMaterialInfo
             // 
-            this.txtVDMaterialInfo.Location = new System.Drawing.Point(29, 19);
+            this.txtVDMaterialInfo.Location = new System.Drawing.Point(6, 19);
             this.txtVDMaterialInfo.Multiline = true;
             this.txtVDMaterialInfo.Name = "txtVDMaterialInfo";
             this.txtVDMaterialInfo.ReadOnly = true;
             this.txtVDMaterialInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtVDMaterialInfo.Size = new System.Drawing.Size(491, 188);
+            this.txtVDMaterialInfo.Size = new System.Drawing.Size(608, 229);
             this.txtVDMaterialInfo.TabIndex = 3;
             // 
             // boxVDDetail
@@ -567,9 +231,9 @@
             this.boxVDDetail.Controls.Add(this.txtVDDetailInfo);
             this.boxVDDetail.Controls.Add(this.lblChooseDetail);
             this.boxVDDetail.Controls.Add(this.cmbBoxChooseDetail);
-            this.boxVDDetail.Location = new System.Drawing.Point(18, 19);
+            this.boxVDDetail.Location = new System.Drawing.Point(18, 6);
             this.boxVDDetail.Name = "boxVDDetail";
-            this.boxVDDetail.Size = new System.Drawing.Size(541, 226);
+            this.boxVDDetail.Size = new System.Drawing.Size(620, 254);
             this.boxVDDetail.TabIndex = 0;
             this.boxVDDetail.TabStop = false;
             this.boxVDDetail.Text = "Detail";
@@ -581,7 +245,7 @@
             this.txtVDDetailInfo.Name = "txtVDDetailInfo";
             this.txtVDDetailInfo.ReadOnly = true;
             this.txtVDDetailInfo.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtVDDetailInfo.Size = new System.Drawing.Size(313, 188);
+            this.txtVDDetailInfo.Size = new System.Drawing.Size(403, 229);
             this.txtVDDetailInfo.TabIndex = 2;
             // 
             // lblChooseDetail
@@ -1259,24 +923,16 @@
             this.txtADDetName.Size = new System.Drawing.Size(243, 20);
             this.txtADDetName.TabIndex = 0;
             // 
-            // Form1
+            // DataViewPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1342, 604);
             this.Controls.Add(this.tabControl1);
-            this.Name = "Form1";
+            this.Name = "DataViewPage";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.tabPage1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.tabViewDetail.ResumeLayout(false);
             this.boxVDCell.ResumeLayout(false);
             this.boxVDCell.PerformLayout();
@@ -1306,35 +962,6 @@
         #endregion
 
         private System.Windows.Forms.TabControl tabControl1;
-        private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox ColumnNum;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox RowNum;
-        private System.Windows.Forms.RadioButton NonIter;
-        private System.Windows.Forms.RadioButton IterCheck;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox Iteration;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.RadioButton FractionCheck;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.RadioButton multiplierCheck;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox CBox;
-        private System.Windows.Forms.TextBox BBox;
-        private System.Windows.Forms.TextBox ABox;
-        private System.Windows.Forms.RadioButton ParalRadButton;
-        private System.Windows.Forms.RadioButton cubeRadButton;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TabPage tabViewDetail;
         private System.Windows.Forms.TabPage tabAddDetail;
         private System.Windows.Forms.GroupBox boxVDDetail;
@@ -1413,7 +1040,6 @@
         private System.Windows.Forms.TextBox txtADAddValue;
         private System.Windows.Forms.TextBox txtADAddDesc;
         private System.Windows.Forms.TextBox txtADAddName;
-        private System.Windows.Forms.Button button3;
     }
 }
 

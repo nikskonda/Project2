@@ -55,49 +55,39 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataSetWorker.cs" />
-    <Compile Include="DBCreater.cs" />
-    <Compile Include="DialogManager.cs" />
-    <Compile Include="Enter.cs">
+    <Compile Include="project2\sql\DBCreater.cs" />
+    <Compile Include="project2\util\DialogManager.cs" />
+    <Compile Include="project2\page\DBConnectionPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Enter.Designer.cs">
-      <DependentUpon>Enter.cs</DependentUpon>
+    <Compile Include="project2\page\DBConnectionPage.Designer.cs">
+      <DependentUpon>DBConnectionPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form1.cs">
+    <Compile Include="project2\page\DataViewPage.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="project2\page\DataViewPage.Designer.cs">
+      <DependentUpon>DataViewPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="Cells.cs" />
-    <Compile Include="Form2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form2.Designer.cs">
-      <DependentUpon>Form2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ISQLWorker.cs" />
-    <Compile Include="Models\Cell.cs" />
-    <Compile Include="Models\CellStructure.cs" />
-    <Compile Include="Models\CellType.cs" />
-    <Compile Include="Models\Constans.cs" />
-    <Compile Include="Models\Detail.cs" />
-    <Compile Include="Models\Material.cs" />
-    <Compile Include="Models\Property.cs" />
-    <Compile Include="Models\Value.cs" />
+    <Compile Include="project2\util\INIManager.cs" />
+    <Compile Include="project2\sql\ISQLWorker.cs" />
+    <Compile Include="project2\model\Cell.cs" />
+    <Compile Include="project2\model\CellStructure.cs" />
+    <Compile Include="project2\model\CellType.cs" />
+    <Compile Include="project2\model\Constans.cs" />
+    <Compile Include="project2\model\Data.cs" />
+    <Compile Include="project2\model\Detail.cs" />
+    <Compile Include="project2\model\Material.cs" />
+    <Compile Include="project2\model\Property.cs" />
+    <Compile Include="project2\model\Value.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SQLFactory.cs" />
-    <Compile Include="SQLWorker.cs" />
-    <EmbeddedResource Include="Enter.resx">
-      <DependentUpon>Enter.cs</DependentUpon>
+    <Compile Include="project2\sql\SQLWorker.cs" />
+    <EmbeddedResource Include="project2\page\DBConnectionPage.resx">
+      <DependentUpon>DBConnectionPage.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form2.resx">
-      <DependentUpon>Form2.cs</DependentUpon>
+    <EmbeddedResource Include="project2\page\DataViewPage.resx">
+      <DependentUpon>DataViewPage.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -24,19 +24,11 @@ namespace Cube
         private String insertCS;
         private String insertDetail;
 
-        public DBCreater(String name)
+        public DBCreater(String name, String path)
         {
-            dbCreate = "USE [master]" +
-            "  CREATE DATABASE[" + name + "]" +
-             " CONTAINMENT = NONE" +
-             " ON PRIMARY" +
-            " (NAME = N'" + name + "', FILENAME = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL14.MSSQLSERVER\\MSSQL\\DATA\\" + name + ".mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )" +
-            " LOG ON" +
-            " (NAME = N'" + name + "_log', FILENAME = N'C:\\Program Files\\Microsoft SQL Server\\MSSQL14.MSSQLSERVER\\MSSQL\\DATA\\" + name + "_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )";
-            cellType = "USE[" + name + "]" +
-            " SET ANSI_NULLS ON  " +
-            " SET QUOTED_IDENTIFIER ON  " +
-            " CREATE TABLE[dbo].[Cell_Types](    [Id_Cell_Type][int] IDENTITY(1, 1) NOT NULL, [Name] [varchar] (50) NOT NULL, CONSTRAINT[PK_Cell_Types] PRIMARY KEY CLUSTERED" +
+            dbCreate = "USE [master] CREATE DATABASE[" + name + "] CONTAINMENT = NONE ON PRIMARY (NAME = N'" + name + "', FILENAME = N'" + path + "\\" + name + ".mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )" +
+            " LOG ON (NAME = N'" + name + "_log', FILENAME = N'"+ path+"\\" + name + "_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )";
+            cellType = "USE[" + name + "] SET ANSI_NULLS ON SET QUOTED_IDENTIFIER ON CREATE TABLE[dbo].[Cell_Types](    [Id_Cell_Type][int] IDENTITY(1, 1) NOT NULL, [Name] [varchar] (50) NOT NULL, CONSTRAINT[PK_Cell_Types] PRIMARY KEY CLUSTERED" +
             " ([Id_Cell_Type] ASC )WITH(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON[PRIMARY]) ON[PRIMARY] ";
             cells = "USE [" + name + "] " +
             " SET ANSI_NULLS ON  SET QUOTED_IDENTIFIER ON " +

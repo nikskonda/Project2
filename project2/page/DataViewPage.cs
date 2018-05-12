@@ -1,48 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Numerics;
-
-using SolidWorks.Interop.sldworks;
-using SolidWorks.Interop.swconst;
-using System.Runtime.InteropServices;
 using Cube.Models;
 
 namespace Cube
 {
-    public partial class Form1 : Form
+    internal partial class DataViewPage : Form
     {
-        SldWorks swApp;
-        IModelDoc2 swModel;
-        private SketchManager swSketchManager;
-        private SelectionMgr swSelMgr;
+        private SQLWorker sqlWorker;
 
-        SQLWorker sqlWorker;
-
-        Cells h;
-
-        List<Detail> details = new List<Detail>();
-        Detail newDetail = new Detail();
-
-        List<Property> detProperties = new List<Property>();
-        List<Property> matProperties = new List<Property>();
-       List<Property> cellProperties = new List<Property>();
-        List<Property> csProperties = new List<Property>();
-        List<Property> objProperties = new List<Property>();
+        private Detail newDetail = new Detail();
 
 
+        private Data data = new Data();
 
         //Add Detail
         //List<Cell> cells;
-        List<Material> materials= new List<Material>();
+        
 
-        public Form1(String ServerName, String DataBaseName)
+        public DataViewPage(String ServerName, String DataBaseName)
         {
             sqlWorker = new SQLWorker(ServerName, DataBaseName);
             InitializeComponent();
@@ -50,11 +26,6 @@ namespace Cube
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            cubeRadButton.Checked = true;
-            multiplierCheck.Checked = true;
-            IterCheck.Checked = true;
-
-
             loadDetails();
 
             //Add Detail
@@ -76,10 +47,10 @@ namespace Cube
 
         private void loadDetailProperty(ComboBox cmb)
         {
-            detProperties.Clear();
-            detProperties = sqlWorker.GetProperties(ParentType.Detail);
+            data.detProperties.Clear();
+            data.detProperties = sqlWorker.GetProperties(ParentType.Detail);
             cmb.Items.Clear();
-            foreach (Property p in detProperties)
+            foreach (Property p in data.detProperties)
             {
                 cmb.Items.Add(p.GetStringNameAndUnit());
             }
@@ -87,10 +58,10 @@ namespace Cube
 
         private void loadCSProperty(ComboBox cmb)
         {
-            csProperties.Clear();
-            csProperties = sqlWorker.GetProperties(ParentType.CelluralStructure);
+            data.csProperties.Clear();
+            data.csProperties = sqlWorker.GetProperties(ParentType.CelluralStructure);
             cmb.Items.Clear();
-            foreach (Property p in csProperties)
+            foreach (Property p in data.csProperties)
             {
                 cmb.Items.Add(p.GetStringNameAndUnit());
             }
@@ -98,10 +69,10 @@ namespace Cube
 
         private void loadCellProperty(ComboBox cmb)
         {
-            cellProperties.Clear();
-            cellProperties = sqlWorker.GetProperties(ParentType.Cell);
+            data.cellProperties.Clear();
+            data.cellProperties = sqlWorker.GetProperties(ParentType.Cell);
             cmb.Items.Clear();
-            foreach (Property p in cellProperties)
+            foreach (Property p in data.cellProperties)
             {
                 cmb.Items.Add(p.GetStringNameAndUnit());
             }
@@ -109,10 +80,10 @@ namespace Cube
 
         private void loadMaterialProperty(ComboBox cmb)
         {
-            matProperties.Clear();
-            matProperties = sqlWorker.GetProperties(ParentType.Material);
+            data.matProperties.Clear();
+            data.matProperties = sqlWorker.GetProperties(ParentType.Material);
             cmb.Items.Clear();
-            foreach (Property p in matProperties)
+            foreach (Property p in data.matProperties)
             {
                 cmb.Items.Add(p.GetStringNameAndUnit());
             }
@@ -122,9 +93,9 @@ namespace Cube
 
         private void loadDetails()
         {
-            details.Clear();
-            details = sqlWorker.GetDetails();
-            foreach (Detail d in details)
+            data.details.Clear();
+            data.details = sqlWorker.GetDetails();
+            foreach (Detail d in data.details)
             {
                 cmbBoxChooseDetail.Items.Add(d.Name);
             }
@@ -133,9 +104,9 @@ namespace Cube
         private void loadMaterials()
         {
             cmbADMatChoose.Items.Clear();
-            materials.Clear();
-            materials = sqlWorker.GetMaterials();
-            foreach (Material m in materials)
+            data.materials.Clear();
+            data.materials = sqlWorker.GetMaterials();
+            foreach (Material m in data.materials)
             {
                 cmbADMatChoose.Items.Add(m.Name);
             }
@@ -161,377 +132,6 @@ namespace Cube
             }
         }
 
-        private void cubeRadButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cubeRadButton.Checked)
-            {
-                BBox.Enabled = false;
-                CBox.Enabled = false;
-            }
-        }
-
-        private void ParalRadButton_CheckedChanged(object sender, EventArgs e)
-        {
-            if (ParalRadButton.Checked)
-            {
-                BBox.Enabled = true;
-                CBox.Enabled = true;
-            }
-        }
-
-        private void IterCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if (IterCheck.Checked)
-            {
-                Iteration.Enabled = true;
-                RowNum.Enabled = false;
-                ColumnNum.Enabled = false;
-            }
-        }
-
-        private void NonIter_CheckedChanged(object sender, EventArgs e)
-        {
-            if (NonIter.Checked)
-            {
-                Iteration.Enabled = false;
-                RowNum.Enabled = true;
-                ColumnNum.Enabled = true;
-            }
-        }
-
-        private void multiplierCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if (multiplierCheck.Checked)
-            {
-                label5.Text = "Множитель";
-                label6.Text = "";
-                textBox2.Enabled = false;
-            }
-        }
-
-        private void fractionCheck_CheckedChanged(object sender, EventArgs e)
-        {
-            if (FractionCheck.Checked)
-            {
-                label5.Text = "Числитель";
-                label6.Text = "Знаменатель";
-                textBox2.Enabled = true;
-            }
-        }
-
-/*////////////////////////////////////////////////////////////////////////////////////////////////////////
-///////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            double bodyWidth;
-            double bodyHeight;
-            double bodyLenght;
-
-            if (cubeRadButton.Checked)
-            {
-                bodyWidth = Convert.ToDouble(ABox.Text.Replace('.', ','));
-                bodyHeight = bodyWidth;
-                bodyLenght = bodyWidth;
-            }
-            else
-            {
-                bodyWidth = Convert.ToDouble(ABox.Text.Replace('.', ','));
-                bodyHeight = Convert.ToDouble(BBox.Text.Replace('.', ','));
-                bodyLenght = Convert.ToDouble(CBox.Text.Replace('.', ','));
-            }
-
-            if(bodyWidth<=0 && bodyHeight<=0 && bodyLenght <= 0)
-            {
-                MessageBox.Show("Стороны тела не могут быть меньше нуля.");
-                return;
-            }
-
-            h = new Cells(bodyWidth, bodyHeight, bodyLenght);
-
-            if (multiplierCheck.Checked)
-            {
-                var buff = Convert.ToDouble(textBox1.Text.Replace('.', ','));
-                if (buff >= 1) {
-                    MessageBox.Show("Множитель не может быть больше 1");
-                    return;
-                };
-                h.SetHoleVWithMultiplier(buff);
-            }
-            else
-            {
-                h.SetHoleVWithMultiplier(Convert.ToDouble(textBox1.Text.Replace('.', ',')),
-                    Convert.ToDouble(textBox2.Text.Replace('.', ',')));
-            }
-            //MessageBox.Show(h.GetVHole().ToString());
-
-            h.SetIterationNumber(Convert.ToInt32(Iteration.Text));
-            h.KCalculation();
-
-            foreach (Complex element in h.debugList)
-            {
-                textBox5.Text += element.ToString();
-                textBox5.Text += System.Environment.NewLine;
-            }
-            textBox5.Text += System.Environment.NewLine;
-
-        }
-
-       
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-            if (!GetSolidworks())
-            {
-                return;
-            }//*/
-
-            if (!h.isAvailable()) {
-                MessageBox.Show("Невозможно начертить фигуру - не найден корень или ошибка в воде данных");
-                return;
-            }
-            else
-            {
-                MessageBox.Show("Решение найдено");
-                //return;
-            }
-
-            double a, b, c;
-            double acc = 100.0;
-            
-            //получем ссылку на интерфейс, ответственный за рисование
-            var sm = swModel.SketchManager;
-            var fm = swModel.FeatureManager;
-
-            swModel.Extension.SelectByID2("Сверху", "PLANE", 0, 0, 0, false, 0, null, 0); //выбрал плоскость  
-
-            sm.InsertSketch(false);
-            //создать основание
-            //var rect = sm.CreateCenterRectangle(0, 0, 0, a / 2, b / 2, 0);
-            var rect = sm.CreateCenterRectangle(0, 0, 0, h.GetBodyWidth()/ acc / 2.0, h.GetBodyHeight() / acc / 2.0, 0);
-            //очистить буфер выбранных элементов
-            swModel.ClearSelection();
-
-            //вытянуть бобышку
-            var feature = featureExtrusion(h.GetBodyLenght()/acc);
-            swModel.ClearSelection();
-
-            //получить грани бобышки
-            var faces = feature.GetFaces();
-            //выбрать вторую (вверх бобышки)
-            var ent = faces[1] as Entity;
-            //выбрать верхнюю грань
-            ent.Select(true);
-            //добавить на неё эскиз
-            sm.InsertSketch(false);
-            //*/
-
-            //MessageBox.Show(h.GetBodyWidth().ToString());
-            //MessageBox.Show(h.GetBodyHeight().ToString());
-            //MessageBox.Show(h.GetBodyLenght().ToString());
-
-            //MessageBox.Show(a.ToString());
-            //MessageBox.Show(b.ToString());
-            //MessageBox.Show(h.GetHoleWidth().ToString());
-            //MessageBox.Show(h.GetHoleHeight().ToString());
-            //MessageBox.Show(h.GetK().ToString());
-
-            //holes
-            double x_current = ((-h.GetBodyWidth()) /2.0 + (h.GetK() + h.GetHoleWidth() / 2.0)) /acc;
-            double y_current = ((h.GetBodyHeight() / 2.0) - (h.GetK() + (h.GetHoleHeight() / 2.0))) / acc;
-            double x_end = (((-h.GetBodyWidth()) / 2.0) + (h.GetK() + h.GetHoleWidth())) / acc;
-            double y_end = ((h.GetBodyHeight() / 2.0) - (h.GetK() + h.GetHoleHeight())) / acc;
-           
-            double leftHoleCenterX = x_current;
-            double leftHoleCenterY = y_current;
-
-            double delta = (h.GetHoleWidth() + h.GetK()) / acc;
-
-            int row, collumn;
-
-            if (h.iterCheck())
-            {
-                row = (int)Math.Sqrt(Math.Pow(2, h.GetIterationNumber()));
-                collumn = row;
-            } else {
-                row = (int)Math.Sqrt(Math.Pow(2, h.GetIterationNumber() - 1));
-                collumn = 2 * row;
-            }
-
-            for (int i = 0; i < row; i++)
-            {
-                swModel.SketchManager.CreateCenterRectangle(x_current, y_current, 0, x_end, y_end, 0);
-                for (int j = 1; j < collumn; j++)
-                {
-                    x_current = x_current + delta;
-                    x_end = x_end + delta;
-                    swModel.SketchManager.CreateCenterRectangle(x_current, y_current, 0, x_end, y_end, 0);
-                }
-                x_current = leftHoleCenterX;
-                y_current = leftHoleCenterY - (h.GetK() + h.GetHoleHeight()) / acc;
-                leftHoleCenterX = x_current;
-                leftHoleCenterY = y_current;
-                x_end = x_current + (h.GetHoleWidth() / 2.0) / acc;
-                y_end = y_current + (h.GetHoleHeight() / 2.0) / acc;
-            }
-
-            featureCut(h.GetHoleLenght() / acc);
-            swModel.ClearSelection();
-            
-
-            /*
-            sm.CreateCenterRectangle(-2/acc, -2/acc, 0, -1 / acc, -1 / acc, 0);
-            sm.CreateCenterRectangle(2 / acc, 2 / acc, 2 / acc, 0, 0, 0);
-
-            featureCut(10/acc);
-            swModel.ClearSelection();
-            */
-            /*
-            sm.CreateCenterRectangle(-1 / acc, -1 / acc, -1 / acc, -a / 4, -b / 4, 0);
-            featureCut(c, false, swEndConditions_e.swEndCondThroughAll);
-            swModel.ClearSelection();
-            */
-
-            /*
-            swModel.Extension.SelectByID2("Сверху", "PLANE", 0, 0, 0, false, 0, null, 0); //выбрал плоскость  
-            swModel.SketchManager.InsertSketch(true); //вставил эскиз в режиме редактирования  
-            swModel.SketchManager.CreateCenterRectangle(0, 0, 0, a / 2, b / 2, 0); // создал круг
-            swModel.ClearSelection();
-
-            var feature = swModel.FeatureManager.FeatureExtrusion2(true, false, false, 0, 0, c, 0.01, false, false,
-                false, false, 1.74532925199433E-02, 1.74532925199433E-02, false, false, false, false,
-                true, true, true, 0, 0, false);
-
-            //swModel.FeatureManager.FeatureCut3()
-
-            feature.Select(false);
-            feature.DeSelect();
-            
-            var faces = feature.GetFaces();
-            var ent = faces[1] as Entity;
-            ent.Select(true);
-            /*swModel.SketchManager.CreateCircleByRadius(0.2, 0.2, 0.2, 0.1);
-            ent.DeSelect();
-
-            swModel.FeatureManager.FeatureExtrusion2(true, false, false, 0, 0, 0.1, 0.01, false, false,
-    false, false, 1.74532925199433E-02, 1.74532925199433E-02, false, false, false, false,
-    true, true, true, 0, 0, false);
-            */
-
-            /*
-            swModel.SketchManager.InsertSketch(true); //закрыл эскиз  
-            swModel.ClearSelection2(true); //снял выделение с линии
-            */
-
-        }
-
-        /// <summary>
-        /// Вырезать по контуру
-        /// </summary>
-        /// <param name="deepth">глубина выреза</param>
-        /// <param name="flip">вырезать внутри контура или снаружи</param>
-        /// <param name="mode">режим выреза</param>
-        /// <returns>объект "вырез"</returns>
-        private Feature featureCut(double deepth, bool flip = false, swEndConditions_e mode = swEndConditions_e.swEndCondBlind)
-        {
-            return swModel.FeatureManager.FeatureCut2(true, flip, false, (int)mode, (int)mode,
-                deepth, 0, false, false, false, false, 0, 0, false, false, false, false, false,
-                false, false, false, false, false);
-        }
-
-        /// <summary>
-        /// Вытянуть бобышку
-        /// </summary>
-        /// <param name="deepth">высота выдавливания</param>
-        /// <param name="dir">направление выдвливания</param>
-        /// <returns>объект бобышка</returns>
-        private Feature featureExtrusion(double deepth, bool dir = false)
-        {
-            return swModel.FeatureManager.FeatureExtrusion2(true, false, dir,
-                (int)swEndConditions_e.swEndCondBlind, (int)swEndConditions_e.swEndCondBlind,
-                deepth, 0, false, false, false, false, 0, 0, false, false, false, false, true,
-                true, true, 0, 0, false);
-        }
-
-        private Boolean GetSolidworks()
-        {
-            try
-            {
-                // Присваиваем переменной ссылку на запущенный solidworks (по названию)
-                swApp = (SldWorks)Marshal.GetActiveObject("SldWorks.Application");
-            }
-            catch
-            {
-                // Отображает окно сообщения с заданным текстом
-                MessageBox.Show("Не удалось найти запущенный Solidworks!");
-                return false;
-            }
-
-            if (swApp.ActiveDoc == null)
-            {
-                // Отображает окно сообщения с заданным текстом
-                MessageBox.Show("Надо открыть деталь перед использованием");
-                return false;
-            }
-
-
-            // Присваиваем переменной ссылку на открытый активный проект в  SolidWorks
-            swModel = (ModelDoc2)swApp.ActiveDoc;
-
-            // Получает ISketchManager объект, который позволяет получить доступ к процедурам эскиза
-            swSketchManager = (SketchManager)swModel.SketchManager;
-
-            // Получает ISelectionMgr объект для данного документа, что делает выбранный объект доступным
-            swSelMgr = (SelectionMgr)swModel.SelectionManager;
-
-
-            /*// Проверка на открытие именно детали в SolidWorks
-            if (swModel.GetType() != (int)swDocumentTypes_e.swDocDRAWING)
-            {
-                string text = "Это работает только на уровне чертежа";
-                // Отображает окно сообщения с заданным текстом
-                MessageBox.Show(text, "Warning!", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                return false;
-            }*/
-
-            return true;
-        }
-
-        private void RowNum_TextChanged(object sender, EventArgs e)
-        {
-
-            if (ColumnNum.Text == "" || RowNum.Text == "")
-            {
-                Iteration.Text = "";
-                return;
-            }
-            else {
-                //Добавить проверку на ввод чисел
-                int a = Convert.ToInt32(RowNum.Text);
-                int b = Convert.ToInt32(ColumnNum.Text);
-
-                int i = 0;
-                while (true)
-                {
-                    if(Math.Round(Math.Pow(2, i), 0) == a * b)
-                    {
-                        Iteration.Text = i.ToString();
-                        return;
-                    }
-                    else if (Math.Round(Math.Pow(2, i), 0) > a * b)
-                    {
-                        Iteration.Text = "Не степень 2";
-                        return;
-                    }
-                    i++;
-                }
-
-            }
-        }
-
-
-
         //GOVNOKOD
 
         private void cmbBoxChooseDetail_SelectedIndexChanged(object sender, EventArgs e)
@@ -543,7 +143,7 @@ namespace Cube
             cmbVDChooseCell.Items.Clear();
             
 
-            Detail detail = details.FindLast(x => x.Name == cmbBoxChooseDetail.SelectedItem.ToString());
+            Detail detail = data.details.FindLast(x => x.Name == cmbBoxChooseDetail.SelectedItem.ToString());
 
             if (detail != null)
             {
@@ -567,7 +167,7 @@ namespace Cube
         {
             txtVDCellInfo.Clear();
 
-            Detail detail = details.FindLast(x => x.Name.Equals(cmbBoxChooseDetail.SelectedItem.ToString()));
+            Detail detail = data.details.FindLast(x => x.Name.Equals(cmbBoxChooseDetail.SelectedItem.ToString()));
 
             Cell cell = detail.CellStructure.Cells.FindLast(x => x.Name.Equals(cmbVDChooseCell.SelectedItem.ToString()));
 
@@ -625,7 +225,7 @@ namespace Cube
             if ((IsNumber(txt)) && (!IsNull(cmbADDetParamChoose)))
             {
                 string prop = cmbADDetParamChoose.SelectedItem.ToString();
-                Property p = detProperties.FindLast(x => x.GetStringNameAndUnit().Equals(prop));
+                Property p = data.detProperties.FindLast(x => x.GetStringNameAndUnit().Equals(prop));
                 if (p != null)
                 {
                     p.Value = new Value(Convert.ToDouble(txt));
@@ -691,7 +291,7 @@ namespace Cube
             if (!IsNull(cmbADMatChoose))
             {
                 string txt = cmbADMatChoose.SelectedItem.ToString();
-                Material m = materials.FindLast(x => x.Name.Equals(txt));
+                Material m = data.materials.FindLast(x => x.Name.Equals(txt));
                 if (m != null)
                 {
                     newDetail.Material = m;
@@ -710,7 +310,7 @@ namespace Cube
         {
             if (!IsNull(cmbADMatChoose))
             {
-                Material m = materials.FindLast(x => x.Name.Equals(cmbADMatChoose.SelectedItem.ToString()));
+                Material m = data.materials.FindLast(x => x.Name.Equals(cmbADMatChoose.SelectedItem.ToString()));
                 txtADMatInfo.Text = m.ToString();
             } else
             {
@@ -724,7 +324,7 @@ namespace Cube
             if ((IsNumber(txt)) && (!IsNull(cmbCSProp)))
             {
 
-                Property p = csProperties.FindLast(x => x.GetStringNameAndUnit().Equals(cmbCSProp.SelectedItem.ToString()));
+                Property p = data.csProperties.FindLast(x => x.GetStringNameAndUnit().Equals(cmbCSProp.SelectedItem.ToString()));
                 if (p != null)
                 {
                     p.Value = new Value(Convert.ToDouble(txt));
@@ -795,7 +395,7 @@ namespace Cube
         //choose material
         private void chooseMaterial_CheckedChanged(object sender, EventArgs e)
         {
-            objProperties.Clear();
+            data.objProperties.Clear();
             loadMaterialProperty(cmbADAddProp);
 
             txtADAddName.Clear();
@@ -803,7 +403,7 @@ namespace Cube
 
             gbCT.Hide();
 
-            printListProperties(txtADAddProp, objProperties);
+            printListProperties(txtADAddProp, data.objProperties);
             btnADAddObj.Text = "Add Material";
 
         }
@@ -820,7 +420,7 @@ namespace Cube
         //choose cell
         private void chooseCell_CheckedChanged(object sender, EventArgs e)
         {
-            objProperties.Clear() ;
+            data.objProperties.Clear() ;
 
             loadCellProperty(cmbADAddProp);
 
@@ -830,7 +430,7 @@ namespace Cube
 
             gbCT.Show();
 
-            printListProperties(txtADAddProp, objProperties);            
+            printListProperties(txtADAddProp, data.objProperties);            
 
 
             loadCellTypes();
@@ -857,8 +457,8 @@ namespace Cube
 
                     material.Name = txtADAddName.Text;
                     material.Description = txtADAddDesc.Text;
-                    material.Properties = new List<Property>(objProperties);
-                    foreach (Material mat in materials)
+                    material.Properties = new List<Property>(data.objProperties);
+                    foreach (Material mat in data.materials)
                     {
                         if (mat.Equals(material))
                         {
@@ -867,8 +467,8 @@ namespace Cube
                         }
                     }
 
-                    objProperties.Clear();
-                    printListProperties(txtADAddProp, objProperties);
+                    data.objProperties.Clear();
+                    printListProperties(txtADAddProp, data.objProperties);
 
                     if (sqlWorker.AddMaterial(material))
                     {
@@ -891,7 +491,7 @@ namespace Cube
                     //    return;
                     //}
 
-                    cell.Properties = new List<Property>(objProperties);                  
+                    cell.Properties = new List<Property>(data.objProperties);                  
 
                     if (!IsNull(cmbADCellTypes))
                     {
@@ -914,8 +514,8 @@ namespace Cube
                         }
                     }
 
-                    objProperties.Clear();
-                    printListProperties(txtADAddProp, objProperties);
+                    data.objProperties.Clear();
+                    printListProperties(txtADAddProp, data.objProperties);
 
                     if (sqlWorker.AddCell(cell))
                     {
@@ -943,10 +543,10 @@ namespace Cube
                 Models.Property p;
                 if (chooseMaterial.Checked)
                 {
-                    p = matProperties.FindLast(x => x.GetStringNameAndUnit().Equals(prop));
+                    p = data.matProperties.FindLast(x => x.GetStringNameAndUnit().Equals(prop));
                 }
                 else {
-                    p = detProperties.FindLast(x => x.GetStringNameAndUnit().Equals(prop));
+                    p = data.detProperties.FindLast(x => x.GetStringNameAndUnit().Equals(prop));
                 }
                 if (p!=null)
                 {
@@ -958,7 +558,7 @@ namespace Cube
                         return;
                     } 
 
-                    foreach (Property p1 in objProperties)
+                    foreach (Property p1 in data.objProperties)
                     {
                         if (p1.Equals(p))
                         {
@@ -967,9 +567,9 @@ namespace Cube
                         }
                     }
 
-                    objProperties.Add(p);
+                    data.objProperties.Add(p);
 
-                    printListProperties(txtADAddProp, objProperties);
+                    printListProperties(txtADAddProp, data.objProperties);
                 }
                 else
                 {
@@ -987,12 +587,12 @@ namespace Cube
             if ((!IsNull(cmbADAddProp)))
             {
 
-                Property p = objProperties.FindLast(x => x.GetStringNameAndUnit().Equals(cmbADAddProp.SelectedItem.ToString()));
+                Property p = data.objProperties.FindLast(x => x.GetStringNameAndUnit().Equals(cmbADAddProp.SelectedItem.ToString()));
                 if (p != null)
                 {
 
-                    objProperties.Remove(p);
-                    printListProperties(txtADAddProp, objProperties);
+                    data.objProperties.Remove(p);
+                    printListProperties(txtADAddProp, data.objProperties);
                 }
                 else
                 {
@@ -1073,7 +673,7 @@ namespace Cube
 
             if (!IsNull(cmbADMatChoose))
             {
-                newDetail.Material = materials.FindLast(x => x.Name.Equals(cmbADMatChoose.SelectedItem.ToString()));
+                newDetail.Material = data.materials.FindLast(x => x.Name.Equals(cmbADMatChoose.SelectedItem.ToString()));
             }
             else
             {
@@ -1101,7 +701,7 @@ namespace Cube
 
             if (newDetail != null)
             { 
-                foreach (Detail d in details)
+                foreach (Detail d in data.details)
                 {
                     if (d.Equals(newDetail))
                     {
@@ -1234,7 +834,7 @@ namespace Cube
                     switch (pt)
                     {
                         case ParentType.Detail:
-                            foreach (Property prop in detProperties)
+                            foreach (Property prop in data.detProperties)
                             {
                                 if (p.GetStringNameAndUnit().Equals(prop.GetStringNameAndUnit()))
                                 {
@@ -1249,7 +849,7 @@ namespace Cube
                             if (chooseMaterial.Checked)
                             {
                                 loadMaterialProperty(cmbADAddProp);
-                                foreach (Property prop in detProperties)
+                                foreach (Property prop in data.detProperties)
                                 {
                                     if (p.GetStringNameAndUnit().Equals(prop.GetStringNameAndUnit()))
                                     {
@@ -1264,7 +864,7 @@ namespace Cube
                             if (chooseCell.Checked)
                             {
                                 loadCellProperty(cmbADAddProp);
-                                foreach (Property prop in detProperties)
+                                foreach (Property prop in data.detProperties)
                                 {
                                     if (p.GetStringNameAndUnit().Equals(prop.GetStringNameAndUnit()))
                                     {
@@ -1276,7 +876,7 @@ namespace Cube
                             }
                             break;
                         case ParentType.CelluralStructure:
-                            foreach (Property prop in detProperties)
+                            foreach (Property prop in data.detProperties)
                             {
                                 if (p.GetStringNameAndUnit().Equals(prop.GetStringNameAndUnit()))
                                 { 
@@ -1309,12 +909,5 @@ namespace Cube
             return null;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Form2 f = new Form2();
-            f.ShowDialog();
-
-            f.Close();
-        }
     }
 }

@@ -23,11 +23,10 @@ d:\Univer\Visual Studio Project\Sells_Cube_2703'18\bin\Debug\Cube.exe.config
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\bin\Debug\Cube.exe
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\bin\Debug\Cube.pdb
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csprojResolveAssemblyReference.cache
-d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.Form1.resources
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.Properties.Resources.resources
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csproj.GenerateResource.Cache
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csproj.CoreCompileInputs.cache
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.exe
 d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.pdb
-D:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.Form2.resources
-D:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.Enter.resources
+D:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.DBConnectionPage.resources
+D:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.DataViewPage.resources

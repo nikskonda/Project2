@@ -19,6 +19,8 @@ namespace Cube
         private String PCname;
         private String DBname;
 
+        private static DBCreater dbCreater;
+
         private SqlConnection sqlConnection;
 
         public static bool IsCreate(String PCname, String DBname)
@@ -674,18 +676,19 @@ namespace Cube
 
         }
 
-        public static bool createDataBase(String PCname, String DBname)
+
+
+        public static bool createDataBase(String PCname, String DBname, String path)
         {
+            dbCreater = new DBCreater(DBname, path);
             bool f = false;
             StringBuilder sb = new StringBuilder("server = ");
             sb.Append(PCname).Append("; Integrated Security = true");
             try
             {
                 SqlConnection sqlConnection = new SqlConnection(sb.ToString());
-
-                DBCreater db = new DBCreater(DBname);
                 
-                    SqlCommand sql = new SqlCommand(db.getCreateDBSting(), sqlConnection);
+                    SqlCommand sql = new SqlCommand(dbCreater.getCreateDBSting(), sqlConnection);
                     sqlConnection.Open();
                     sql.ExecuteReader();
                     sqlConnection.Close();
@@ -698,16 +701,15 @@ namespace Cube
                 Console.WriteLine(ex);
                 return false;
             }
+            dbCreater = null;
             return f;
         }
 
         private static bool addStoreProc(SQLWorker worker)
         {
             bool f = false;
-            try
-            {
-                DBCreater db = new DBCreater(worker.DBname);
-                List<String> list = db.getListProc();
+            try { 
+                List<String> list = dbCreater.getListProc();
                 SqlConnection con = worker.GetSqlConnection();
                 foreach (String str in list)
                 {
@@ -731,10 +733,8 @@ namespace Cube
         private static bool addNewTables(SQLWorker worker)
         {
             bool f = false;
-            try
-            {
-                DBCreater db = new DBCreater(worker.DBname);
-                List<String> list = db.getList();
+            try { 
+                List<String> list = dbCreater.getList();
                 SqlConnection con = worker.GetSqlConnection();
                 foreach (String str in list)
                 {
