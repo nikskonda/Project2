@@ -1,32 +1,56 @@
-C:\Users\kola\Desktop\Cube\bin\Debug\Cube.exe.config
-C:\Users\kola\Desktop\Cube\bin\Debug\Cube.exe
-C:\Users\kola\Desktop\Cube\bin\Debug\Cube.pdb
-C:\Users\kola\Desktop\Cube\obj\Debug\Cube.csprojResolveAssemblyReference.cache
-C:\Users\kola\Desktop\Cube\obj\Debug\Cube.Form1.resources
-C:\Users\kola\Desktop\Cube\obj\Debug\Cube.Properties.Resources.resources
-C:\Users\kola\Desktop\Cube\obj\Debug\Cube.csproj.GenerateResource.Cache
-C:\Users\kola\Desktop\Cube\obj\Debug\Cube.exe
-C:\Users\kola\Desktop\Cube\obj\Debug\Cube.pdb
-C:\Users\Юрий\Desktop\Cube\bin\Debug\Cube.exe.config
-C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.exe
-C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.pdb
-C:\Users\Юрий\Desktop\Cube\bin\Debug\Cube.exe
-C:\Users\Юрий\Desktop\Cube\bin\Debug\Cube.pdb
-C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.csprojResolveAssemblyReference.cache
-C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.Form1.resources
-C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.Properties.Resources.resources
-C:\Users\Юрий\Desktop\Cube\obj\Debug\Cube.csproj.GenerateResource.Cache
-G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Sells_Cube_2703'18\bin\Debug\Cube.exe.config
-G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Sells_Cube_2703'18\obj\Debug\Cube.exe
-G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Sells_Cube_2703'18\obj\Debug\Cube.pdb
-d:\Univer\Visual Studio Project\Sells_Cube_2703'18\bin\Debug\Cube.exe.config
-d:\Univer\Visual Studio Project\Sells_Cube_2703'18\bin\Debug\Cube.exe
-d:\Univer\Visual Studio Project\Sells_Cube_2703'18\bin\Debug\Cube.pdb
-d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csprojResolveAssemblyReference.cache
-d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.Properties.Resources.resources
-d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csproj.GenerateResource.Cache
-d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.csproj.CoreCompileInputs.cache
-d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.exe
-d:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.pdb
-D:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.DBConnectionPage.resources
-D:\Univer\Visual Studio Project\Sells_Cube_2703'18\obj\Debug\Cube.DataViewPage.resources
+C:\Users\kola\Desktop\Куб\Cube\bin\Debug\Cube.exe.config
+C:\Users\kola\Desktop\Куб\Cube V4\bin\Debug\Cube.exe.config
+C:\Users\kola\Desktop\Куб\Cube V4\bin\Debug\Cube.exe
+C:\Users\kola\Desktop\Куб\Cube V4\bin\Debug\Cube.pdb
+C:\Users\kola\Desktop\Куб\Cube V4\obj\Debug\Cube.csprojResolveAssemblyReference.cache
+C:\Users\kola\Desktop\Куб\Cube V4\obj\Debug\Cube.Form1.resources
+C:\Users\kola\Desktop\Куб\Cube V4\obj\Debug\Cube.Properties.Resources.resources
+C:\Users\kola\Desktop\Куб\Cube V4\obj\Debug\Cube.csproj.GenerateResource.Cache
+C:\Users\kola\Desktop\Куб\Cube V4\obj\Debug\Cube.exe
+C:\Users\kola\Desktop\Куб\Cube V4\obj\Debug\Cube.pdb
+C:\Users\kola\Desktop\Куб\Cube V4.1\bin\Debug\Cube.exe.config
+C:\Users\kola\Desktop\Куб\Cube V4.1\obj\Debug\Cube.exe
+C:\Users\kola\Desktop\Куб\Cube V4.1\obj\Debug\Cube.pdb
+C:\Users\kola\Desktop\Куб\Cube V4.1\bin\Debug\Cube.exe
+C:\Users\kola\Desktop\Куб\Cube V4.1\bin\Debug\Cube.pdb
+C:\Users\kola\Desktop\Куб\Cube V4.1\obj\Debug\Cube.csprojResolveAssemblyReference.cache
+C:\Users\kola\Desktop\Куб\Cube V4.1\obj\Debug\Cube.Form1.resources
+C:\Users\kola\Desktop\Куб\Cube V4.1\obj\Debug\Cube.Properties.Resources.resources
+C:\Users\kola\Desktop\Куб\Cube V4.1\obj\Debug\Cube.csproj.GenerateResource.Cache
+C:\Users\kola\Desktop\Куб\Cube V4.1\obj\Debug\Cube.Form2.resources
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Cube V4.1_2404'18\bin\Debug\Cube.exe.config
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Cube V4.1_2404'18\bin\Debug\Cube.exe
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Cube V4.1_2404'18\bin\Debug\Cube.pdb
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Cube V4.1_2404'18\obj\Debug\Cube.csprojResolveAssemblyReference.cache
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Cube V4.1_2404'18\obj\Debug\Cube.Form1.resources
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Cube V4.1_2404'18\obj\Debug\Cube.Form2.resources
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Cube V4.1_2404'18\obj\Debug\Cube.Properties.Resources.resources
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Cube V4.1_2404'18\obj\Debug\Cube.csproj.GenerateResource.Cache
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Cube V4.1_2404'18\obj\Debug\Cube.exe
+G:\12_CurrDocs\1_Bntu_Повт_'17-18\15_Bntu_Povt_Confs_'17-18\Bntu_Fitr_SnpcITSiP'18\BntuFitr_SnpcITSiP2018_Paps_03'18\Cube V4.1_2404'18\obj\Debug\Cube.pdb
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\obj\Debug\Cube.csprojResolveAssemblyReference.cache
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\obj\Debug\Cube.Form1.resources
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\obj\Debug\Cube.Form2.resources
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\obj\Debug\Cube.Properties.Resources.resources
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\obj\Debug\Cube.csproj.GenerateResource.Cache
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\obj\Debug\Cube.csproj.CoreCompileInputs.cache
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\obj\Debug\Cube.exe
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\obj\Debug\Cube.pdb
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\bin\Debug\Cube.exe.config
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\bin\Debug\Cube.exe
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\bin\Debug\Cube.pdb
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\obj\Debug\Cube.DataViewPage.resources
+d:\Univer\Visual Studio Project\Cube V4.1_2404'18\obj\Debug\Cube.DBConnectionPage.resources
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\bin\Debug\Cube.exe.config
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\bin\Debug\Cube.exe
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\bin\Debug\Cube.pdb
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\obj\Debug\Cube.csprojResolveAssemblyReference.cache
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\obj\Debug\Cube.Form1.resources
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\obj\Debug\Cube.Form2.resources
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\obj\Debug\Cube.DataViewPage.resources
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\obj\Debug\Cube.DBConnectionPage.resources
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\obj\Debug\Cube.Properties.Resources.resources
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\obj\Debug\Cube.csproj.GenerateResource.Cache
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\obj\Debug\Cube.csproj.CoreCompileInputs.cache
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\obj\Debug\Cube.exe
+D:\Univer\Visual Studio Project\Cube V4.1_1805'18\obj\Debug\Cube.pdb

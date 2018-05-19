@@ -16,7 +16,7 @@ namespace Cube
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new DBConnectionPage());
+            Application.Run(new Form1());
         }
     }
 }
