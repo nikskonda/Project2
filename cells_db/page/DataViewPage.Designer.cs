@@ -42,6 +42,7 @@
             this.boxDVMaterial = new System.Windows.Forms.GroupBox();
             this.txtVDMaterialInfo = new System.Windows.Forms.TextBox();
             this.boxVDDetail = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.txtVDDetailInfo = new System.Windows.Forms.TextBox();
             this.lblChooseDetail = new System.Windows.Forms.Label();
             this.cmbBoxChooseDetail = new System.Windows.Forms.ComboBox();
@@ -265,6 +266,7 @@
             // 
             // boxVDDetail
             // 
+            this.boxVDDetail.Controls.Add(this.button1);
             this.boxVDDetail.Controls.Add(this.txtVDDetailInfo);
             this.boxVDDetail.Controls.Add(this.lblChooseDetail);
             this.boxVDDetail.Controls.Add(this.cmbBoxChooseDetail);
@@ -274,6 +276,16 @@
             this.boxVDDetail.TabIndex = 0;
             this.boxVDDetail.TabStop = false;
             this.boxVDDetail.Text = "Detail";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(19, 188);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(137, 42);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Report";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // txtVDDetailInfo
             // 
@@ -1083,6 +1095,7 @@
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox ResultsTxt;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -907,5 +907,23 @@ namespace Cube
             return null;
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Detail ddd = null;
+            if (!IsNull(cmbBoxChooseDetail))
+            {
+                ddd = data.details.FindLast(x => x.Name == cmbBoxChooseDetail.SelectedItem.ToString());
+            }
+            int id = 0;
+            string name = "";
+            if (ddd != null)
+            {
+                id = ddd.Id;
+                name = ddd.Name;
+            }
+            Form3 rf = new Form3(id, name);
+            rf.ShowDialog();
+            rf.Close();
+        }
     }
 }
