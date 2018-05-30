@@ -38,6 +38,6 @@ namespace cells_db.sql
 
         bool AddResearchResult(ResearchResult researchResult);
 
-
+        bool delDetail(Detail detail);
     }
 }

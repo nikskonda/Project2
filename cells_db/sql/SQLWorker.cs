@@ -882,5 +882,25 @@ namespace cells_db.sql
             }
             return f;
         }
+
+        public bool delDetail(Detail detail)
+        {
+            bool f = false;
+            try
+            {
+                sqlConnection = GetSqlConnection();
+                SqlCommand sql = new SqlCommand("DELETE FROM Details WHERE Id_Detail="+detail.Id, sqlConnection);
+                sqlConnection.Close();
+                sqlConnection.Open();
+                sql.ExecuteReader();
+                sqlConnection.Close();
+                f = true;
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return f;
+        }
     }
 }

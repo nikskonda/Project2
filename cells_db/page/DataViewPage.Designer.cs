@@ -111,6 +111,7 @@
             this.txtAVDetParamValue = new System.Windows.Forms.TextBox();
             this.txtADDetDesc = new System.Windows.Forms.TextBox();
             this.txtADDetName = new System.Windows.Forms.TextBox();
+            this.button2 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabViewDetail.SuspendLayout();
             this.tabControl2.SuspendLayout();
@@ -266,6 +267,7 @@
             // 
             // boxVDDetail
             // 
+            this.boxVDDetail.Controls.Add(this.button2);
             this.boxVDDetail.Controls.Add(this.button1);
             this.boxVDDetail.Controls.Add(this.txtVDDetailInfo);
             this.boxVDDetail.Controls.Add(this.lblChooseDetail);
@@ -972,6 +974,16 @@
             this.txtADDetName.Size = new System.Drawing.Size(243, 20);
             this.txtADDetName.TabIndex = 0;
             // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(21, 133);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(134, 40);
+            this.button2.TabIndex = 4;
+            this.button2.Text = "Delete curent detail";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // DataViewPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1096,6 +1108,7 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TextBox ResultsTxt;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }
 

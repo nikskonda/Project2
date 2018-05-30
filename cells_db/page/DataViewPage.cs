@@ -93,6 +93,7 @@ namespace Cube
         private void loadDetails()
         {
             data.loadDetails(sqlWorker);
+            cmbBoxChooseDetail.Items.Clear();
             foreach (Detail d in data.details)
             {
                 cmbBoxChooseDetail.Items.Add(d.Name);
@@ -816,11 +817,8 @@ namespace Cube
                     }
                 }   
                     string txt = cmbChooseParentType.SelectedItem.ToString();
-                    
-
-
+                              
                     Property p = new Property(txtNewPropName.Text, txtNewPropUnit.Text);
-
 
                     if (ConvertToParentType(txt)==null)
                     {
@@ -924,6 +922,40 @@ namespace Cube
             Form3 rf = new Form3(id, name);
             rf.ShowDialog();
             rf.Close();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if (DialogManager.showDialogYesNo("Do you want delete this detail?"))
+            {
+                Detail ddd = null;
+                if (!IsNull(cmbBoxChooseDetail))
+                {
+                    ddd = data.details.FindLast(x => x.Name == cmbBoxChooseDetail.SelectedItem.ToString());
+                    if (ddd == null)
+                    {
+                        DialogManager.showDialogError("Detail not found.");
+                        return;
+                    }
+                    if (sqlWorker.delDetail(ddd))
+                    {
+                        loadDetails();
+                        clearViewPage();
+                    } else
+                    {
+                        DialogManager.showDialogError("DataBase error. Try Again.");
+                    }
+                }
+            }
+        }
+
+        public void clearViewPage()
+        {
+            txtVDCellInfo.Clear();
+            txtVDCSInfo.Clear();
+            txtVDDetailInfo.Clear();
+            txtVDMaterialInfo.Clear();
+            cmbBoxChooseDetail.SelectedText = "";
         }
     }
 }
