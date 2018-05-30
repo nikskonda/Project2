@@ -644,13 +644,25 @@ namespace Cube
 
             if (!IsNull(txtADDetName))
             {
-                newDetail.Name = txtADDetName.Text;
+                
             }
             else
             {
                 DialogManager.showDialogError("Please Enter the Name Detail.");
                 return;
             }
+
+            foreach (Detail det in data.details)
+            {
+                if (det.Name.Equals(txtADDetName.Text))
+                {
+                    DialogManager.showDialogError("Please Enter other Name Detail.");
+                    return;
+                }
+            }
+
+            newDetail.Name = txtADDetName.Text;
+
             if (!IsNull(txtADDetDesc))
             {
                 newDetail.Description = txtADDetDesc.Text;
